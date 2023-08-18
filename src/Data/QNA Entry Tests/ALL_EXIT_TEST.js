@@ -1,74 +1,65 @@
 const cnExitTest = [
     {
-        question: "Explain the role of cookies in web applications and discuss their benefits and drawbacks.",
+        question: "How do twisted pair cables and coaxial cables differ in terms of their usage and characteristics?",
         user_answer: "",
-        expected_answer: `Cookies are small pieces of data stored on a user's device by a web browser. They are used to remember user preferences and login sessions. However, they can also be used for tracking and privacy concerns.`,
-        sub_topic: "Application Level Concepts",
+        expected_answer: `Twisted pair cables consist of pairs of insulated wires twisted together, used for Ethernet networking and telephone lines. 
+        Coaxial cables feature a central conductor surrounded by insulation, shielding, and an outer conductor, commonly used for cable television and high-frequency data transmission.`,
+        sub_topic: "Introduction and Physical layer",
     },
 
     {
-        question: "What is HTTPS, and why is it important for secure communication on the web?",
+        question: "How does the physical layer ensure synchronization between sender and receiver?",
         user_answer: "",
-        expected_answer: `HTTPS (Hypertext Transfer Protocol Secure) is a secure version of HTTP that uses encryption to protect data transmitted between a user's browser and the web server. It's essential for secure communication, especially when handling sensitive information like passwords and payment details.`,
-        sub_topic: "Application Level Concepts",
+        expected_answer: `The physical layer ensures synchronization between sender and receiver through techniques like clock signals and preamble sequences. 
+        Clock signals establish a timing reference, while preamble sequences provide a recognizable pattern for receiver synchronization in data transmission.`,
+        sub_topic: "Introduction and Physical layer",
     },
   
     {
-      question: "Is both Internet and Web Same ?",
+      question: "Describe the role of repeaters in extending the reach of a network.",
       user_answer: "",
-      expected_answer: `The internet and the web are often used interchangeably,
-      but they are not the same thing.
-      The internet is a global network of computers,
-      while the web is a way of accessing information on the internet.
+      expected_answer: `Repeaters are devices used to amplify and regenerate digital or analog signals in a network, extending their reach by compensating for signal degradation over long distances, thereby improving data transmission quality and allowing signals to travel farther without loss.
   `,
-      sub_topic: "Application Level Concepts",
+      sub_topic: "Introduction and Physical layer",
     },
   
     {
       question:
-        "what is network topology and what topology does college labs use in common  to connect with each other",
+        "Define CSMA/CD and CSMA/CA and explain their roles in managing collisions in LANs.",
       user_answer: "",
-      expected_answer: `Network topology refers to the physical or logical arrangement of devices, nodes, and links within a computer network.
-      It defines how devices are interconnected and how data flows between them.
-      One of the more common topologies used in such environments is likely the star topology.
+      expected_answer: `CSMA/CD (Carrier Sense Multiple Access with Collision Detection) is a protocol used in Ethernet networks to manage collisions by first listening for carrier signals and, if a collision is detected, the transmission is aborted, and a backoff time is introduced.
+
+      CSMA/CA (Carrier Sense Multiple Access with Collision Avoidance) is a protocol employed in wireless networks to prevent collisions by sensing the medium before transmitting, and using mechanisms like Request-to-Send (RTS) and Clear-to-Send (CTS) handshakes to coordinate transmissions and minimize interference.
       `,
-      sub_topic: "Hardware Concepts",
+      sub_topic: "Data link layer and LAN",
     },
   
     {
-      question: "what is a Proxy Server , does it provide Anonymity and Privacy",
+      question: "Describe the purpose of the FCS (Frame Check Sequence) field in a data frame at the Data Link Layer.",
       user_answer: "",
-      expected_answer: `A proxy server is an intermediate server that sits between a client device and a destination server. It acts as a gateway,
-      forwarding client requests to the destination server and potentially providing caching,
-      filtering, and anonymity services. Proxy servers can act as intermediaries between users and the internet, making the user's IP address and identity hidden from the websites they visit.
-      This enhances user privacy and helps protect sensitive information.
+      expected_answer: `The FCS (Frame Check Sequence) field in a data frame at the Data Link Layer serves the purpose of providing error detection by generating a checksum value based on the contents of the frame. 
+      This checksum is used to verify the integrity of the received data and identify any potential transmission errors.
       `,
-      sub_topic: "Hardware Concepts",
+      sub_topic: "Data link layer and LAN",
     },
   
     {
-      question: "Does a router contain switch inside it",
+      question: "Discuss the purpose of error detection and correction at the Data Link Layer.",
       user_answer: "",
-      expected_answer: `Yes, most routers contain a switch inside it.
-      The switch is used to connect the different ports on the router together,
-      so that devices on the same network can communicate with each other.
-      The router also contains a routing engine, which is responsible for routing data packets between different networks.
-      In some cases, a router may not have a built-in switch. This is usually the case with high-end routers that are designed for use in large networks.
-      These routers typically have more ports than a typical home router, and they may also need to support more advanced routing protocols.
-      In these cases, the router will typically have a separate switch that is connected to the router.`,
-      sub_topic: "Hardware Concepts",
+      expected_answer: `Error detection and correction at the Data Link Layer ensures reliable transmission of data over a communication channel by identifying and correcting errors that may occur during transmission, enhancing data integrity and reducing the need for retransmissions. 
+      This is crucial for maintaining data accuracy and minimizing disruptions in the communication process.`,
+      sub_topic: "Data link layer and LAN",
     },
   
     {
-      question: "What is Peer to Peer Systems and is BitTorrent Peer to Peer?",
+      question: "How does OSPF  routing protocol determine the best path in a network?",
       user_answer: "",
       expected_answer: `
-      Peer-to-peer is a networking model in which each computer in the network acts as both a client and a server.
-      This means that each computer can both send and receive data from other computers on the network.
-      BitTorrent: BitTorrent is a popular file-sharing system that uses P2P technology.
-      In BitTorrent, users share files with each other directly, without the need for a central server.
+      
+OSPF uses the Shortest Path First (SPF) algorithm, specifically Dijkstra's algorithm, to determine the best path in a network based on the sum of link costs. 
+It selects the path with the lowest cumulative cost from source to destination, making it the optimal route.
       `,
-      sub_topic: "Generic Questions",
+      sub_topic: "Network and Routing",
     },
   
     {
@@ -76,70 +67,69 @@ const cnExitTest = [
       user_answer: "",
       expected_answer: `Load balancing is a technique that distributes traffic across multiple servers. This helps to improve performance and reliability by preventing any single server from becoming overloaded.
       Load balancing is often used for web servers, but it can also be used for other types of servers, such as database servers and application servers.`,
-      sub_topic: "Generic Questions",
+      sub_topic: "Network and Routing",
     },
   
     {
       question:
-        "Is it possible to share data between systems without web ? If Yes then mention few ways to do it.",
+        "How does a firewall contribute to network security and routing?",
       user_answer: "",
       expected_answer: `
-      Yes, it is possible to share data between systems without the web.
-      Peer to Peer file sharing, Direct file sharing, Shared Network File Sharing
+      
+A firewall enhances network security by filtering incoming and outgoing traffic based on predefined rules, preventing unauthorized access and potential threats. 
+It also aids routing by controlling traffic flow between different network segments, ensuring secure and efficient data transfer.
       `,
-      sub_topic: "Generic Questions",
+      sub_topic: "Network and Routing",
     },
   
     {
-      question: "what is udp and how it improves your online gaming performance?",
+      question: "How can Quality of Service (QoS) mechanisms be implemented at the transport layer?",
       user_answer: "",
-      expected_answer: `User Datagram Protocol, is a transport protocol used in computer networking for sending data between devices over a network.
-      UDP provides a more lightweight and connectionless approach to data transmission.
-      UDP improves online gaming performance primarily due to its characteristics:
-      1.Low Latency
-      2.Faster Data Transmission
-      3.Reduced Congestion
+      expected_answer: `Quality of Service (QoS) mechanisms can be implemented at the transport layer through techniques like traffic prioritization and bandwidth allocation, ensuring different levels of service for various data flows. 
+      This is achieved by employing protocols like Differentiated Services (DiffServ) or Resource Reservation Protocol (RSVP) for improved control over network resources and delivery guarantees.
       `,
-      sub_topic: "Data Transportation",
+      sub_topic: "Transport layer",
     },
   
     {
       question:
-        "What are the names that are used to depict data in different OSI layers",
+        "Explain the term window size in the context of the Transport layer.",
       user_answer: "",
-      expected_answer: "Bit, Frame, Packet, Segment",
-      sub_topic: "Data Transportation",
+      expected_answer: `In the context of the Transport layer, "window size" refers to the number of unacknowledged data segments a sender can transmit before requiring an acknowledgment from the receiver. 
+      It helps optimize data flow and manage network congestion in protocols like TCP.`,
+      sub_topic: "Transport layer",
     },
   
     {
-      question: "Explain the concept of caching in data transport.",
+      question: "What is a socket, and how is it related to the Transport layer?",
       user_answer: "",
-      expected_answer: `Caching involves storing copies of web resources locally, either in the browser or on intermediary servers.
-      This reduces the need to fetch resources from the original server, improving page load times.`,
-      sub_topic: "Data Transportation",
+      expected_answer: `A socket is an endpoint for sending or receiving data across a computer network. 
+      It's related to the Transport layer as it provides the programming interface for applications to communicate over a network using protocols like TCP or UDP.`,
+      sub_topic: "Transport layer",
     },
   
     {
       question:
-        "What is Bandwidth ? Does Higher bandwidth promise faster data seed",
+        "How does email communication work at the application layer?",
       user_answer: "",
-      expected_answer: `Bandwidth refers to the maximum amount of data that can be transmitted over a network connection in a given period of time.
-      Higher bandwidth does not always guarantee faster data speed, although it can contribute to it under certain conditions.`,
-      sub_topic: "understanding of Basic terminologies",
+      expected_answer: `Email communication at the application layer uses the Simple Mail Transfer Protocol (SMTP) for sending messages and the Post Office Protocol (POP3) or Internet Message Access Protocol (IMAP) for receiving and managing messages, facilitating the exchange of electronic mail between clients and servers.`,
+      sub_topic: "Application layer",
     },
     {
-      question: "What is ping ? is Higher ping prefered over Lower ping ?",
+      question: "Explain the concept of MIME types and their significance in the Application layer.",
       user_answer: "",
       expected_answer: `
-      "Ping" is a network utility used to test the reachability of a host (usually a computer or server) on an Internet Protocol (IP) network and to measure the round-trip time it takes for data packets to travel from the source to the destination and back.
-      No lower the ping better the speed is`,
-      sub_topic: "understanding of Basic terminologies",
+      
+MIME (Multipurpose Internet Mail Extensions) types are labels used to identify the type of data contained within a file, helping applications interpret how to handle it. 
+In the Application layer, MIME types enable proper content rendering and processing, ensuring seamless communication and compatibility between different software and devices.`,
+      sub_topic: "Application layer",
     },
     {
-      question: "Is OSI model actually implemented in real life? If yes where",
+      question: "How does the Application layer support distributed databases and information retrieval?",
       user_answer: "",
-      expected_answer: `No the OSI model is just a reference model. It is not implemented anywhere but rather used as a reference for building other models`,
-      sub_topic: "understanding of Basic terminologies",
+      expected_answer: `The Application layer supports distributed databases and information retrieval by providing APIs and protocols for seamless communication between distributed components, enabling data access, storage, and retrieval coordination across the networked environment. 
+      It also facilitates user-friendly interfaces and query languages for efficient retrieval of distributed data.`,
+      sub_topic: "Application layer",
     },
   ];
 
@@ -147,39 +137,12 @@ const cnExitTest = [
 
 const dbmsExitTest=[
   {
-    question: "Explain the role of sharding in scaling a real-time chat application's database.",
+    question: "Discuss the trade-offs between using a NoSQL database and a relational database for specific use cases.",
     user_answer: "",
-    expected_answer: `Sharding involves partitioning a database into smaller, manageable pieces (shards) distributed across multiple servers. 
-    In a real-time chat app, this optimizes scalability by distributing message data across shards, allowing parallel processing and reducing single-server load. 
-    As user activity grows, sharding maintains responsiveness, ensuring smooth and efficient chat functionality.`,
-    sub_topic: "Application Level Concepts",
-  },
-
-  {
-    question:
-      "Explain the CAP theorem's relevance to database design in distributed systems.",
-    user_answer: "",
-    expected_answer: `The CAP theorem states that in a distributed database, you can achieve at most two out of three: Consistency, Availability, and Partition tolerance. 
-    Distributed databases must balance these aspects: ensuring data consistency, providing high availability, and handling network partitions to maintain system integrity and responsiveness, depending on the specific application's needs and priorities.`,
-    sub_topic: "Application Level Concepts",
-  },
-
-  {
-    question: "How does a DBMS ensure data consistency in a distributed application environment?",
-    user_answer: "",
-    expected_answer: `
-    DBMS ensures data consistency through mechanisms like distributed transactions and two-phase commit protocols. 
-    It coordinates transactions across multiple nodes, ensuring either all transactions commit or none do`,
-    sub_topic: "Application Level Concepts",
-  },
-
-  {
-    question:
-      "What are the advantages of using a star schema in data warehousing?",
-    user_answer: "",
-    expected_answer: `Using a star schema in data warehousing offers advantages like simplified query design due to clear fact-table and dimension-table separation, enabling faster query performance. 
-    It enhances data aggregation and analysis by reducing join complexities and optimizing reporting processes.`,
-    sub_topic: "Data Modeling",
+    expected_answer: `NoSQL databases excel in handling unstructured or semi-structured data at scale with high flexibility, but may sacrifice some data consistency and complex querying. 
+    Relational databases offer strong data integrity and complex querying, but might struggle with massive scalability and schema changes in dynamic environments. 
+    The choice depends on data structure, consistency, and scalability needs.`,
+    sub_topic: "Relational Databases",
   },
 
   {
@@ -187,7 +150,32 @@ const dbmsExitTest=[
     user_answer: "",
     expected_answer: `Denormalization is the process of intentionally introducing redundancy into a database by merging tables or adding duplicate data to improve query performance. 
     It is applied when read-heavy workloads demand faster retrieval of data, and the trade-off of increased storage and update complexities is deemed acceptable for optimizing query response times.`,
-    sub_topic: "Data Modeling",
+    sub_topic: "Relational Databases",
+  },
+
+  {
+    question: "Explain the concept of referential integrity and how it's enforced in a relational database.",
+    user_answer: "",
+    expected_answer: `
+    Referential integrity ensures that relationships between tables in a relational database remain consistent. 
+    It's enforced through foreign key constraints, ensuring that values in a foreign key column match values in the referenced primary key column of another table.`,
+    sub_topic: "Relational Databases",
+  },
+
+  {
+    question:
+      "Why might a table be in BCNF but still suffer from anomalies or inefficiencies in certain scenarios?",
+    user_answer: "",
+    expected_answer: `A table might be in BCNF (Boyce-Codd Normal Form) but still suffer anomalies or inefficiencies due to the potential presence of functional dependencies and redundancy that can lead to complex query requirements and performance issues in specific usage scenarios.`,
+    sub_topic: "Database Design",
+  },
+
+  {
+    question: "What is denormalization, and when might it be applied to enhance query performance in a database?",
+    user_answer: "",
+    expected_answer: `Denormalization is the process of intentionally introducing redundancy into a database by merging tables or adding duplicate data to improve query performance. 
+    It is applied when read-heavy workloads demand faster retrieval of data, and the trade-off of increased storage and update complexities is deemed acceptable for optimizing query response times.`,
+    sub_topic: "Database Design",
   },
 
   {
@@ -195,33 +183,7 @@ const dbmsExitTest=[
     user_answer: "",
     expected_answer: `Cardinality in entity-relationship modeling specifies the number of instances that can be associated with a relationship. It can be one-to-one, one-to-many, many-to-one, or many-to-many. 
     Participation constraints determine whether all or only some entities in an entity set must participate in a relationship.`,
-    sub_topic: "Data Modeling",
-  },
-
-  {
-    question: "How does a foreign key establish relationships between tables?",
-    user_answer: "",
-    expected_answer: `A foreign key in a database table establishes a relationship by referencing the primary key of another table. 
-    It enforces referential integrity, ensuring that values in the foreign key column match existing values in the referenced primary key column, maintaining data consistency and enabling data retrieval across related tables.`,
-    sub_topic: "Generic Questions",
-  },
-
-  {
-    question: "What is a database schema, and why is it important?",
-    user_answer: "",
-    expected_answer: `
-    A database schema is a logical blueprint that defines the structure, organization, and relationships of tables, columns, and constraints in a database. 
-    It's crucial because it ensures data consistency, defines data integrity rules, and provides a standardized framework for data storage, retrieval, and management.`,
-    sub_topic: "Generic Questions",
-  },
-
-  {
-    question:
-      "How does data mining contribute to decision-making?",
-    user_answer: "",
-    expected_answer: `Data mining extracts valuable insights from large datasets, identifying patterns and trends that aid decision-making. 
-    By analyzing historical data, it enables businesses to make informed choices, optimize strategies, and predict future outcomes, enhancing overall decision-making accuracy and effectiveness.`,
-    sub_topic: "Generic Questions",
+    sub_topic: "Database Design",
   },
 
   {
@@ -230,7 +192,31 @@ const dbmsExitTest=[
     expected_answer: `
     In the context of ACID properties and transactions, the system ensures data storage consistency by utilizing transaction logs and buffering changes. 
     It maintains atomicity by using undo and redo logs for transaction rollback and recovery, and enforces durability by persistently writing committed transactions to disk before acknowledging their completion.`,
-    sub_topic: "Database Storage",
+    sub_topic: "Transactions and Concurrency",
+  },
+
+  {
+    question: "Explain the meaning of concurrency control in DBMS.",
+    user_answer: "",
+    expected_answer: `Concurrency control in DBMS refers to the management of simultaneous access to shared data by multiple transactions, ensuring that data integrity is maintained during parallel execution. 
+    It involves mechanisms like locks and timestamps to prevent conflicts and maintain consistency in a multi-user database environment.`,
+    sub_topic: "Transactions and Concurrency",
+  },
+
+  {
+    question:
+      "Explain the concept of snapshot isolation and its benefits in a multi-user DBMS environment.",
+    user_answer: "",
+    expected_answer: `Snapshot isolation is a database transaction concept that ensures each transaction sees a consistent snapshot of the database at the start of the transaction, preventing conflicts between concurrent transactions and providing a higher level of isolation, consistency, and reduced contention in a multi-user DBMS environment.`,
+    sub_topic: "Transactions and Concurrency",
+  },
+
+  {
+    question: "Can heuristics effectively handle multi-query optimization scenarios in a database system?",
+    user_answer: "",
+    expected_answer: `
+    Heuristics can provide quick and reasonably good solutions for multi-query optimization in database systems, but they might not guarantee the optimal solution due to their approximate nature and lack of systematic exploration of all possibilities. Advanced optimization techniques like dynamic programming or cost-based optimization are often more suitable for achieving optimal results in complex multi-query scenarios.`,
+    sub_topic: "Data Storage and Querying",
   },
 
   {
@@ -238,37 +224,35 @@ const dbmsExitTest=[
       "Explain how solid-state drives (SSDs) impact database performance and storage.",
     user_answer: "",
     expected_answer: "Solid-state drives (SSDs) significantly improve database performance and storage by offering faster data access and reduced latency compared to traditional hard disk drives (HDDs). This leads to quicker query execution, shorter transaction times, and overall enhanced responsiveness, while also decreasing power consumption and mechanical failure risks associated with HDDs.",
-    sub_topic: "Database Storage",
+    sub_topic: "Data Storage and Querying",
   },
 
   {
-    question: "How does data partitioning enhance scalability and manageability of large databases?",
+    question: "How do modern database systems incorporate hybrid indexing approaches to balance various query types?",
     user_answer: "",
-    expected_answer: `Data partitioning enhances scalability and manageability of large databases by distributing the dataset into smaller, more manageable segments, allowing parallel processing and reducing contention. 
-    This accelerates query performance, optimizes resource utilization, and simplifies maintenance tasks like backup and data movement.`,
-    sub_topic: "Database Storage",
+    expected_answer: `Modern database systems incorporate hybrid indexing by combining different indexing techniques (e.g., B-tree, hash, bitmap) to optimize performance for various query types, leveraging strengths of each approach to balance between range, equality, and full-text searches efficiently. This allows the system to adapt to diverse query patterns and enhance overall query performance.`,
+    sub_topic: "Data Storage and Querying",
   },
 
   {
     question:
-      "Define primary key and explain its significance in a relational database.",
+      "What is a two-phase commit protocol in transaction processing within distributed databases?",
     user_answer: "",
-    expected_answer: `A primary key is a unique identifier for each record in a relational database table. It ensures data integrity by enforcing uniqueness and facilitates efficient data retrieval and referencing, forming the basis for establishing relationships between tables and maintaining relational database structure.`,
-    sub_topic: "understanding of Basic terminologies",
+    expected_answer: `The two-phase commit protocol is a distributed transaction management technique that ensures all participating databases either commit or abort a transaction together. It involves a coordinator initiating a prepare phase and a commit phase to achieve transaction consistency across the distributed system.`,
+    sub_topic: "Advanced topics",
   },
   {
-    question: "Explain the term ACID properties in database transactions.",
+    question: "Explain the ODMG object model and its significance in object-oriented databases.",
     user_answer: "",
-    expected_answer: `ACID properties (Atomicity, Consistency, Isolation, Durability) ensure that database transactions are reliable and robust.
-    Atomicity guarantees all or nothing execution, Consistency ensures valid state transitions, Isolation prevents interference between concurrent transactions, and Durability ensures committed changes persist even after system failures.`,
-    sub_topic: "understanding of Basic terminologies",
+    expected_answer: `The ODMG (Object Data Management Group) object model defines a standard for representing and manipulating objects in object-oriented databases, ensuring interoperability and consistency among different systems. Its significance lies in providing a common framework that facilitates the development and exchange of object-oriented database applications across various platforms.`,
+    sub_topic: "Advanced topics",
   },
   {
-    question: "Explain the meaning of concurrency control in DBMS.",
+    question: "How does XPath differ from XQuery in terms of functionality within XML databases?",
     user_answer: "",
-    expected_answer: `Concurrency control in DBMS refers to the management of simultaneous access to shared data by multiple transactions, ensuring that data integrity is maintained during parallel execution. 
-    It involves mechanisms like locks and timestamps to prevent conflicts and maintain consistency in a multi-user database environment.`,
-    sub_topic: "understanding of Basic terminologies",
+    expected_answer: `
+    XPath is primarily used for navigating and selecting elements within an XML document, while XQuery is a more comprehensive query language designed for retrieving and manipulating data from XML databases, offering more complex querying and transformation capabilities.`,
+    sub_topic: "Advanced topics",
   },
 ];
 
@@ -277,96 +261,95 @@ const dbmsExitTest=[
 
 const osExitTest=[
   {
-    question: "Discuss the role of the operating system in managing power and resource consumption for applications in mobile devices.",
-    user_answer: "",
-    expected_answer: `The operating system in mobile devices manages power and resource consumption by employing techniques such as CPU scaling, adaptive brightness, and background app restrictions to optimize performance and extend battery life, ensuring efficient utilization of hardware resources while prioritizing user experience.`,
-    sub_topic: "Application Level Concepts",
-  },
-
-  {
-    question:
-      "How does an operating system ensure data security and user privacy through access control mechanisms?",
-    user_answer: "",
-    expected_answer: `An operating system ensures data security and user privacy through access control mechanisms by implementing permissions and authentication protocols, restricting unauthorized access to files and resources based on user identities and predefined roles. 
-    It enforces encryption and auditing measures to monitor and safeguard sensitive data from unauthorized manipulation or disclosure.`,
-    sub_topic: "Application Level Concepts",
-  },
-
-  {
-    question: "Explain how the operating system facilitates process migration across different hardware environments.",
-    user_answer: "",
-    expected_answer: `
-    Operating systems enable process migration by abstracting hardware details, encapsulating processes, and employing network communication to transfer state and execution context, allowing seamless movement between systems. 
-    This supports load balancing, fault tolerance, and resource optimization in distributed environments.`,
-    sub_topic: "Application Level Concepts",
-  },
-
-  {
-    question:
-      "Explain the concept of memory protection and how it prevents unauthorized access to memory locations.",
-    user_answer: "",
-    expected_answer: `
-    Memory protection is a hardware and software mechanism in an operating system that restricts direct access to memory locations by processes. 
-    It assigns privilege levels to processes, allowing only authorized operations, preventing unauthorized modification of data, and ensuring isolation between processes to maintain system stability and security.`,
-    sub_topic: "Memory Management",
-  },
-
-  {
-    question: "Explain how the operating system manages memory in a multi-programming environment with varying process sizes.",
-    user_answer: "",
-    expected_answer: `In a multi-programming environment with varying process sizes, the operating system employs dynamic memory allocation techniques, such as paging or segmentation, to allocate memory to processes on-demand.
-     It monitors available memory, allocates space as needed, and may use swapping or page replacement strategies to efficiently manage memory and ensure optimal utilization for concurrent processes with diverse memory requirements.`,
-    sub_topic: "Memory Management",
-  },
-
-  {
-    question: "How does memory allocation differ in a monolithic kernel versus a microkernel-based operating system?",
-    user_answer: "",
-    expected_answer: `
-    In a monolithic kernel, most operating system functions run in a single address space, leading to direct memory access and potential for larger memory footprint, while in a microkernel, only essential services reside in the kernel space, reducing memory usage and improving modularity but possibly increasing inter-process communication overhead.`,
-    sub_topic: "Memory Management",
-  },
-
-  {
-    question: "What role does the interrupt mechanism play in an operating system, and how does it improve system responsiveness?    ",
-    user_answer: "",
-    expected_answer: `
-    The interrupt mechanism in an operating system serves to temporarily halt the normal execution of a process to handle external events, such as hardware requests or errors. 
-    It enhances system responsiveness by allowing immediate attention to critical events, ensuring timely execution of tasks and enabling efficient multitasking without the need for constant polling.`,
-    sub_topic: "Generic Questions",
-  },
-
-  {
-    question: "What is the purpose of device drivers, and how do they enable interaction between hardware and the operating system?",
-    user_answer: "",
-    expected_answer: `Device drivers serve to bridge the gap between hardware devices and the operating system by providing a standardized interface. 
-    They facilitate hardware communication by translating higher-level operating system commands into specific instructions that the hardware components can understand, enabling seamless integration and control of diverse hardware within the system.`,
-    sub_topic: "Generic Questions",
-  },
-
-  {
     question: "Explain the difference between a kernel and a shell in an operating system. ",
     user_answer: "",
     expected_answer: `The kernel is the core component of the operating system that manages hardware resources and provides essential services to other software. 
     The shell, on the other hand, is a user interface that interacts with the kernel, allowing users to execute commands and manage processes, files, and applications.`,
-    sub_topic: "Generic Questions",
-  },
-
-  {
-    question: "Describe the differences between file-level and block-level storage virtualization in a distributed file system.",
-    user_answer: "",
-    expected_answer: `
-    File-level storage virtualization operates at the file level, abstracting physical storage devices into a unified file system view, while block-level storage virtualization works at the block level, creating a pool of storage blocks that can be dynamically allocated to different devices, enhancing flexibility and performance in a distributed file system.`,
-    sub_topic: "File System Management",
+    sub_topic: "Operating System Overview",
   },
 
   {
     question:
-      "What is the role of file caching in improving I/O performance, and how does the operating system manage it?",
+      "What is the concept of a process scheduler in operating systems?",
     user_answer: "",
-    expected_answer: `File caching enhances I/O performance by storing frequently accessed data in memory, reducing the need to access slower storage devices. 
-    The operating system manages caching through algorithms like LRU (Least Recently Used) to prioritize which data to retain, evicting less frequently used data to maintain an optimal balance between memory utilization and improved performance.`,
-    sub_topic: "File System Management",
+    expected_answer: `A process scheduler in operating systems is responsible for managing the allocation of CPU time to multiple processes efficiently. It determines the order and duration of process execution, aiming to optimize resource utilization and system responsiveness. 
+    Scheduling algorithms like Round Robin, Priority, and Multilevel Queue govern this allocation based on factors like priority, execution time, and fairness.`,
+    sub_topic: "Operating System Overview",
+  },
+
+  {
+    question: "How do operating systems provide security and user authentication mechanisms?",
+    user_answer: "",
+    expected_answer: `
+    Operating systems provide security through mechanisms like user authentication (passwords, biometrics), access controls (permissions), and encryption. They manage user accounts, restrict unauthorized access to resources, and enforce privilege separation. Additionally, they offer firewall, antivirus, and intrusion detection tools to safeguard against threats.`,
+    sub_topic: "Operating System Overview",
+  },
+
+  {
+    question: "How does process management differ between monolithic and microkernel-based operating systems?",
+    user_answer: "",
+    expected_answer: `
+    In a monolithic operating system, all essential functions and services run within a single kernel, leading to a tightly integrated but potentially complex design. In contrast, microkernel-based OS separates core services from user-level processes, enhancing modularity and security but can introduce communication overhead between components. Microkernels are more adaptable to changes, while monolithic kernels often provide better performance due to direct communication.`,
+    sub_topic: "Process Management",
+  },
+
+  {
+    question: "How does the operating system prevent and handle deadlocks in the context of process management?",
+    user_answer: "",
+    expected_answer: `
+    Operating systems prevent and handle deadlocks through resource allocation policies and deadlock detection mechanisms. They employ techniques like resource allocation graphs and wait-for graphs to detect and break potential deadlock situations. If a deadlock is detected, OS initiates strategies like process termination, resource preemption, or process rollback to resolve the deadlock and restore system stability.`,
+    sub_topic: "Process Management",
+  },
+
+  {
+    question: "Explain the concept of a zombie process and how the operating system deals with it.",
+    user_answer: "",
+    expected_answer: `A zombie process is a terminated process that still has an entry in the process table. The operating system keeps this entry to allow the parent process to retrieve its exit status. The OS periodically cleans up these entries through the 'wait' system call, releasing the resources held by the zombie process.`,
+    sub_topic: "Process Management",
+  },
+
+  {
+    question:
+      "How does the concept of base and limit registers relate to Contiguous Memory Allocation?",
+    user_answer: "",
+    expected_answer: `
+    Base and limit registers are hardware components used in memory management. In the context of Contiguous Memory Allocation, the base register holds the starting address of a memory block, and the limit register specifies the size of that block. Together, they define the memory range accessible to a process, ensuring it doesn't exceed its allocated memory space.`,
+    sub_topic: "Storage Management and File System",
+  },
+
+  {
+    question: "Describe the concept of logical address space and how it's used in segmentation.",
+    user_answer: "",
+    expected_answer: `
+    A logical address space refers to the range of memory addresses that a process or program uses for its execution. In segmentation, this space is divided into variable-sized segments, each with a distinct purpose (code, data, stack). These segments are assigned logical addresses, allowing efficient memory management and protection by isolating different aspects of a process's execution.`,
+    sub_topic: "Storage Management and File System",
+  },
+
+  {
+    question: "Provide examples of operating systems that are designed for 32-bit and 64-bit architectures.",
+    user_answer: "",
+    expected_answer: `
+    32-bit architecture: Windows XP, Linux Ubuntu 32-bit, macOS Snow Leopard.
+64-bit architecture: Windows 10, Linux Fedora 64-bit, macOS Catalina.`,
+    sub_topic: "Storage Management and File System",
+  },
+
+  {
+    question: "In the context of I/O systems, what role does buffering play in enhancing data transfer between main memory and I/O devices?",
+    user_answer: "",
+    expected_answer: `
+Buffering in I/O systems enhances data transfer between main memory and I/O devices by acting as a temporary storage area. It helps mitigate speed disparities between devices and memory, allowing data to be collected or transmitted in larger, more efficient chunks. This reduces the frequency of direct interactions, optimizing overall data transfer and system performance.
+`,
+    sub_topic: "I/O Systems",
+  },
+
+  {
+    question:
+      "What are the different directory structures used in file systems, such as the hierarchical and indexed structures?",
+    user_answer: "",
+    expected_answer: `Hierarchical Structure: Organizes files and folders in a tree-like hierarchy, with a single root directory and branching subdirectories, as seen in most traditional file systems like Windows File Explorer or Unix/Linux systems.
+    Indexed Structure: Uses an index table to maintain a list of file addresses, allowing direct access to files regardless of their physical location, as exemplified in modern file systems like NTFS or HFS+.`,
+    sub_topic: "I/O Systems",
   },
 
   {
@@ -375,30 +358,32 @@ const osExitTest=[
     user_answer: "",
     expected_answer: `In Unix-like file systems, inodes are data structures that store metadata about files, such as permissions, ownership, timestamps, and pointers to data blocks.
      They play a crucial role in efficient file management by allowing quick access to file attributes and mapping to data blocks, minimizing the need for continuous searching and enhancing overall file system performance.`,
-    sub_topic: "File System Management",
+    sub_topic: "I/O Systems",
   },
 
   {
     question:
-      "What does context switching mean in an operating system?",
+      "How does the media layer handle tasks like audio and video playback?",
     user_answer: "",
-    expected_answer: `Context switching in an operating system refers to the process of saving and restoring the state of a process or thread so that the CPU can switch its execution from one task to another, enabling multitasking and efficient resource utilization while maintaining each process's execution context.`,
-    sub_topic: "understanding of Basic terminologies",
+    expected_answer: `The media layer manages audio and video playback by interfacing with hardware and software components designed for multimedia processing. It decodes and processes media files, synchronizes audio and video streams, and coordinates output to audio and video devices. This layer ensures seamless playback, synchronization, and control of multimedia content in applications and platforms.`,
+    sub_topic: "Case Study",
   },
   {
-    question: "Explain the concept of paging in memory management.",
-    user_answer: "",
-    expected_answer: `Paging is a memory management technique where the physical memory is divided into fixed-size blocks (pages), and the logical memory is similarly divided into blocks of the same size (page frames). 
-    It allows for efficient utilization of memory by dynamically mapping logical pages to physical pages, enabling non-contiguous allocation and simplified address translation.`,
-    sub_topic: "understanding of Basic terminologies",
-  },
-  {
-    question: "Define device driver and its role in hardware interaction.",
+    question: "Describe the file system hierarchy in iOS and Android.",
     user_answer: "",
     expected_answer: `
-    A device driver is software that enables communication between an operating system and a hardware device, translating high-level commands from the OS into instructions the hardware understands. 
-    It serves as a bridge, allowing applications to interact with hardware without needing to understand the intricate details of device-specific communication protocols.`,
-    sub_topic: "understanding of Basic terminologies",
+    iOS: The file system hierarchy in iOS follows a sandboxed structure, isolating app data into individual directories within the "App's Bundle" and "Documents" for user-generated content.
+    Android: Android's file system hierarchy consists of various directories like "System," "Data," and "External Storage," enabling apps to access their own data in the "App's Private" area and shared data in "Public" directories.`,
+    sub_topic: "Case Study",
+  },
+  {
+    question: "How do you configure DNS resolution on a Windows operating system?",
+    user_answer: "",
+    expected_answer: `
+    Go to Control Panel > Network and Sharing Center.
+Click on "Change adapter settings," right-click your network connection, select "Properties," then choose "Internet Protocol Version 4 (TCP/IPv4)" properties.
+Choose "Use the following DNS server addresses" and input preferred and alternate DNS server addresses. Apply and OK.`,
+    sub_topic: "Case Study",
   },
 ];
   

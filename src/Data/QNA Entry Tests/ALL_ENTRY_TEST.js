@@ -1,103 +1,88 @@
 const cnEntryTest = [
   {
-    question: "What is DNS and how it is helps us in our day to day life",
+    question: "Explain the concept of multiplexing and its relevance to the Physical layer.",
     user_answer: "",
-    expected_answer: `DNS stands for Domain Name System, and it is a fundamental technology used to translate human-readable domain names into IP addresses
-        uses in daily life
-        1.efficient browsing
-        2.caching
-        3.load balancing
-        `,
-    sub_topic: "Application Level Concepts",
+    expected_answer: `Multiplexing is the technique of combining multiple data streams into a single transmission channel to efficiently utilize the available bandwidth. 
+    In the Physical layer, multiplexing optimizes data transmission by allowing multiple signals to share the same medium, enhancing overall network efficiency and capacity.`,
+    sub_topic: "Introduction and Physical layer",
   },
 
   {
     question:
-      "What is a firewall, and can a company use firewall to monitor the requests that its employee send?",
+      "Define the term bit rate and explain its significance in networking.",
     user_answer: "",
-    expected_answer: `
-        A firewall is a network security device or software that acts as a barrier between a
-        trusted internal network and untrusted external networks, such as the internet.
-        Its primary purpose is to monitor, filter, and control incoming and outgoing network traffic based on predetermined security rules.
-        `,
-    sub_topic: "Application Level Concepts",
+    expected_answer: `"Bit rate" refers to the number of bits transmitted or received per unit of time, typically measured in bits per second (bps). 
+    It is a crucial metric in networking as it determines the data transmission capacity of a communication channel, influencing the speed at which data can be exchanged between devices in a network.`,
+    sub_topic: "Introduction and Physical layer",
   },
 
   {
-    question: "Is both Internet and Web Same ?",
+    question: "Compare and contrast baseband and broadband signaling.",
     user_answer: "",
-    expected_answer: `The internet and the web are often used interchangeably,
-    but they are not the same thing.
-    The internet is a global network of computers,
-    while the web is a way of accessing information on the internet.
+    expected_answer: `Baseband signaling uses a single channel for transmission, allowing only one signal at a time, while broadband signaling divides the channel into multiple frequency bands, enabling simultaneous transmission of multiple signals. 
+    Baseband is suitable for short distances and digital signals, whereas broadband supports higher data rates and is used for longer distances with analog or digital signals.
 `,
-    sub_topic: "Application Level Concepts",
+    sub_topic: "Introduction and Physical layer",
   },
 
   {
     question:
-      "what is network topology and what topology does college labs use in common  to connect with each other",
+      "What is the IEEE 802.1Q standard, and how does it relate to LANs?",
     user_answer: "",
-    expected_answer: `Network topology refers to the physical or logical arrangement of devices, nodes, and links within a computer network.
-    It defines how devices are interconnected and how data flows between them.
-    One of the more common topologies used in such environments is likely the star topology.
+    expected_answer: `IEEE 802.1Q is a standard for Virtual LAN (VLAN) tagging in Ethernet networks. 
+    It enables the segmentation of LANs into multiple virtual networks, enhancing network efficiency and security by isolating traffic and controlling broadcast domains.
     `,
-    sub_topic: "Hardware Concepts",
+    sub_topic: "Data link layer and LAN",
   },
 
   {
-    question: "what is a Proxy Server , does it provide Anonymity and Privacy",
+    question: "Discuss the significance of the preamble and the start frame delimiter in Ethernet frames.",
     user_answer: "",
-    expected_answer: `A proxy server is an intermediate server that sits between a client device and a destination server. It acts as a gateway,
-    forwarding client requests to the destination server and potentially providing caching,
-    filtering, and anonymity services. Proxy servers can act as intermediaries between users and the internet, making the user's IP address and identity hidden from the websites they visit.
-    This enhances user privacy and helps protect sensitive information.
+    expected_answer: `The preamble in Ethernet frames serves as a synchronization signal, helping receivers synchronize their clocks with the incoming data. 
+    The Start Frame Delimiter (SFD) marks the end of the preamble and signals the start of the Ethernet frame's actual data transmission.
     `,
-    sub_topic: "Hardware Concepts",
+    sub_topic: "Data link layer and LAN",
   },
 
   {
-    question: "Does a router contain switch inside it",
-    user_answer: "",
-    expected_answer: `Yes, most routers contain a switch inside it.
-    The switch is used to connect the different ports on the router together,
-    so that devices on the same network can communicate with each other.
-    The router also contains a routing engine, which is responsible for routing data packets between different networks.
-    In some cases, a router may not have a built-in switch. This is usually the case with high-end routers that are designed for use in large networks.
-    These routers typically have more ports than a typical home router, and they may also need to support more advanced routing protocols.
-    In these cases, the router will typically have a separate switch that is connected to the router.`,
-    sub_topic: "Hardware Concepts",
-  },
-
-  {
-    question: "What is Peer to Peer Systems and is BitTorrent Peer to Peer?",
+    question: "Differentiate between a collision domain and a broadcast domain in LANs.",
     user_answer: "",
     expected_answer: `
-    Peer-to-peer is a networking model in which each computer in the network acts as both a client and a server.
-    This means that each computer can both send and receive data from other computers on the network.
-    BitTorrent: BitTorrent is a popular file-sharing system that uses P2P technology.
-    In BitTorrent, users share files with each other directly, without the need for a central server.
-    `,
-    sub_topic: "Generic Questions",
+    A collision domain refers to a segment of a network where network devices share the same physical communication medium, such as an Ethernet segment. 
+    Collisions can occur when multiple devices attempt to transmit data simultaneously, leading to reduced network efficiency. 
+    On the other hand, a broadcast domain encompasses all devices that receive the same broadcast messages, typically within a single LAN segment or VLAN, isolating broadcast traffic from other segments to manage network efficiency and security.`,
+    sub_topic: "Data link layer and LAN",
   },
 
   {
-    question: "What is load balancing ?",
+    question: "How do routers handle broadcast and multicast traffic differently from unicast traffic?",
     user_answer: "",
-    expected_answer: `Load balancing is a technique that distributes traffic across multiple servers. This helps to improve performance and reliability by preventing any single server from becoming overloaded.
-    Load balancing is often used for web servers, but it can also be used for other types of servers, such as database servers and application servers.`,
-    sub_topic: "Generic Questions",
+    expected_answer: `
+    
+Routers forward unicast traffic to a specific destination based on the destination IP address, while they do not normally forward broadcast traffic, which is intended for all devices in a network segment. 
+Routers can forward multicast traffic to specific groups of devices that have subscribed to the multicast group, using special multicast routing protocols.
+    `,
+    sub_topic: "Network and Routing",
+  },
+
+  {
+    question: "Explain the concept of route aggregation and its benefits in reducing routing table size.",
+    user_answer: "",
+    expected_answer: `Route aggregation involves combining multiple contiguous IP address ranges into a single, summarized route entry. 
+    This reduces routing table size by replacing several individual routes with a more concise entry, enhancing network efficiency and scalability.`,
+    sub_topic: "Network and Routing",
   },
 
   {
     question:
-      "Is it possible to share data between systems without web ? If Yes then mention few ways to do it.",
+      "Explain the concept of next-hop routing.",
     user_answer: "",
     expected_answer: `
-    Yes, it is possible to share data between systems without the web.
-    Peer to Peer file sharing, Direct file sharing, Shared Network File Sharing
+    
+Next-hop routing is a network routing technique where each router forwards data packets to a specific "next-hop" router based on its destination address. 
+This enables efficient data forwarding by directing traffic through a sequence of routers, ultimately reaching its intended destination.
     `,
-    sub_topic: "Generic Questions",
+    sub_topic: "Network and Routing",
   },
 
   {
@@ -110,46 +95,52 @@ const cnEntryTest = [
     2.Faster Data Transmission
     3.Reduced Congestion
     `,
-    sub_topic: "Data Transportation",
+    sub_topic: "Transport layer",
   },
 
   {
     question:
-      "What are the names that are used to depict data in different OSI layers",
+      "Describe the three-way handshake process in TCP connection establishment.",
     user_answer: "",
-    expected_answer: "Bit, Frame, Packet, Segment",
-    sub_topic: "Data Transportation",
+    expected_answer: `The three-way handshake in TCP involves three steps:
+    SYN (Synchronize) sent by the client to the server.
+    SYN-ACK (Synchronize-Acknowledgment) sent by the server to the client, indicating readiness.
+    ACK (Acknowledgment) sent by the client to the server, establishing the connection.`,
+    sub_topic: "Transport layer",
   },
 
   {
-    question: "Explain the concept of caching in data transport.",
+    question: "What is the significance of the FIN flag in TCP connections?",
     user_answer: "",
-    expected_answer: `Caching involves storing copies of web resources locally, either in the browser or on intermediary servers.
-    This reduces the need to fetch resources from the original server, improving page load times.`,
-    sub_topic: "Data Transportation",
+    expected_answer: `The FIN (Finish) flag in TCP (Transmission Control Protocol) signals the sender's intention to terminate the connection. 
+    It indicates the end of data transmission from the sender, allowing the receiving side to acknowledge and initiate the connection termination process.`,
+    sub_topic: "Transport layer",
   },
 
   {
     question:
-      "What is Bandwidth ? Does Higher bandwidth promise faster data seed",
-    user_answer: "",
-    expected_answer: `Bandwidth refers to the maximum amount of data that can be transmitted over a network connection in a given period of time.
-    Higher bandwidth does not always guarantee faster data speed, although it can contribute to it under certain conditions.`,
-    sub_topic: "understanding of Basic terminologies",
-  },
-  {
-    question: "What is ping ? is Higher ping prefered over Lower ping ?",
+      "What role does DNS play in the application layer?",
     user_answer: "",
     expected_answer: `
-    "Ping" is a network utility used to test the reachability of a host (usually a computer or server) on an Internet Protocol (IP) network and to measure the round-trip time it takes for data packets to travel from the source to the destination and back.
-    No lower the ping better the speed is`,
-    sub_topic: "understanding of Basic terminologies",
+    DNS (Domain Name System) in the application layer translates human-readable domain names into IP addresses, enabling devices to locate resources on the internet. 
+    It facilitates seamless communication by allowing users to access websites and services without needing to remember numerical IP addresses.`,
+    sub_topic: "Application layer",
   },
   {
-    question: "Is OSI model actually implemented in real life? If yes where",
+    question: "How does the application layer handle data formatting and encryption?",
     user_answer: "",
-    expected_answer: `No the OSI model is just a reference model. It is not implemented anywhere but rather used as a reference for building other models`,
-    sub_topic: "understanding of Basic terminologies",
+    expected_answer: `
+    
+The application layer handles data formatting through protocols like JSON or XML, structuring data for transmission. 
+Encryption is managed using techniques like TLS/SSL, securing data during transit and ensuring confidentiality and integrity.`,
+    sub_topic: "Application layer",
+  },
+  {
+    question: "How do proxy servers function within the application layer for tasks like caching and security?",
+    user_answer: "",
+    expected_answer: `Proxy servers in the application layer act as intermediaries between clients and destinations, intercepting requests. 
+    For caching, they store and serve frequently accessed content locally, reducing load and improving speed. For security, they can filter requests, block malicious traffic, and provide anonymity by masking client IPs from destinations.`,
+    sub_topic: "Application layer",
   },
 ];
 
@@ -159,82 +150,75 @@ const cnEntryTest = [
 
 const dbmsEntryTest=[
   {
-    question: "How does a DBMS ensure data consistency in a distributed application environment?",
-    user_answer: "",
-    expected_answer: `
-    DBMS ensures data consistency through mechanisms like distributed transactions and two-phase commit protocols. 
-    It coordinates transactions across multiple nodes, ensuring either all transactions commit or none do`,
-    sub_topic: "Application Level Concepts",
-  },
-
-  {
-    question:
-      "Explain the use of indexing in speeding up search operations within a real-time social media feed application.",
-    user_answer: "",
-    expected_answer: `
-    Indexing in a real-time social media feed application involves creating structured data references that expedite search operations. 
-    By pre-sorting and organizing data based on relevant attributes like timestamps or user IDs, indexing reduces the need for full data scans, enabling quicker retrieval of posts and updates.`,
-    sub_topic: "Application Level Concepts",
-  },
-
-  {
-    question: "Explain the benefits of denormalization in a data warehouse for business intelligence.",
-    user_answer: "",
-    expected_answer: `Denormalization in a data warehouse enhances business intelligence by reducing query complexity and improving performance. 
-    By consolidating data and minimizing joins, it speeds up complex analytical queries, enabling faster insights. 
-    This simplification aids in meeting reporting needs efficiently, making the data warehouse a powerful tool for decision-making.`,
-    sub_topic: "Application Level Concepts",
-  },
-
-  {
-    question:
-      "Describe the purpose and usage of surrogate keys in database design, along with their benefits and potential drawbacks.",
-    user_answer: "",
-    expected_answer: `Surrogate keys are artificially created unique identifiers used as primary keys in database tables to simplify data management, enhance performance, and maintain data integrity. 
-    They eliminate reliance on natural keys, ensuring data consistency; however, they may introduce additional complexity and require extra storage due to their synthetic nature.`,
-    sub_topic: "Data Modeling",
-  },
-
-  {
-    question: "Explain the concept of metadata and its importance in documenting and managing the database design.",
-    user_answer: "",
-    expected_answer: `
-    Metadata refers to the descriptive information about data within a database, including details about its structure, relationships, constraints, and usage. 
-    It is vital for understanding, documenting, and effectively managing the database design, aiding in data governance, maintenance, and ensuring accurate interpretation and utilization of stored information.`,
-    sub_topic: "Data Modeling",
-  },
-
-  {
-    question: "Explain the concept of cardinality and participation constraints in entity-relationship modeling.",
-    user_answer: "",
-    expected_answer: `Cardinality in entity-relationship modeling specifies the number of instances that can be associated with a relationship. It can be one-to-one, one-to-many, many-to-one, or many-to-many. 
-    Participation constraints determine whether all or only some entities in an entity set must participate in a relationship.`,
-    sub_topic: "Data Modeling",
-  },
-
-  {
-    question: "What is SQL injection, and how can it be prevented?",
-    user_answer: "",
-    expected_answer: `SQL injection is a cyber attack where malicious SQL code is inserted into input fields to manipulate or access a database improperly. 
-    Prevention involves using parameterized queries, input validation, and web application firewalls to sanitize user inputs and thwart unauthorized database access via injected code.`,
-    sub_topic: "Generic Questions",
-  },
-
-  {
-    question: "What is a stored procedure, and how is it used in a database?",
-    user_answer: "",
-    expected_answer: `
-    A stored procedure is a precompiled set of SQL statements stored in a database that can be executed as a single unit. 
-    It's used to encapsulate frequently executed tasks, enhance security, and improve performance by reducing network traffic between the application and database server.`,
-    sub_topic: "Generic Questions",
-  },
-
-  {
     question: "How does a foreign key establish relationships between tables?",
     user_answer: "",
     expected_answer: `A foreign key in a database table establishes a relationship by referencing the primary key of another table. 
     It enforces referential integrity, ensuring that values in the foreign key column match existing values in the referenced primary key column, maintaining data consistency and enabling data retrieval across related tables.`,
-    sub_topic: "Generic Questions",
+    sub_topic: "Relational Databases",
+  },
+
+  {
+    question: "Explain the difference between a table and a view in a database. ",
+    user_answer: "",
+    expected_answer: `
+    A table in a database stores actual data as structured rows and columns, while a view is a virtual table that presents a subset of data from one or more tables, offering a dynamic way to access and manipulate data without altering the underlying structure.`,
+    sub_topic: "Relational Databases",
+  },
+
+  {
+    question: "Explain the difference between OLTP  and OLAP databases.",
+    user_answer: "",
+    expected_answer: `
+    OLTP (Online Transaction Processing) databases are designed for real-time, high-speed transaction processing and manage everyday business operations, focusing on data accuracy and consistency. 
+    OLAP (Online Analytical Processing) databases are optimized for complex querying and analysis of large volumes of historical data, providing insights for decision-making and strategic planning.`,
+    sub_topic: "Relational Databases",
+  },
+
+  {
+    question:
+      "What role does cardinality play in designing relationships between database tables?",
+    user_answer: "",
+    expected_answer: `
+    Cardinality in database design determines the number of instances that can be associated between tables. It helps define the nature of relationships as one-to-one, one-to-many, or many-to-many, influencing data integrity and query optimization.`,
+    sub_topic:"Database Design",
+  },
+
+  {
+    question: "How does denormalization affect data modification operations like inserts, updates, and deletes?",
+    user_answer: "",
+    expected_answer: `
+    Denormalization can improve the performance of data retrieval operations by reducing the need for complex joins and improving query speed. However, it can complicate data modification operations like inserts, updates, and deletes, as redundant data needs to be carefully managed and synchronized across denormalized tables, potentially leading to data integrity issues and increased maintenance efforts.`,
+    sub_topic: "Database Design",
+  },
+
+  {
+    question: "Explain the role of the Entity-Relationship (ER) diagram in the database design process.",
+    user_answer: "",
+    expected_answer: `The Entity-Relationship (ER) diagram visually represents the logical structure of a database by illustrating entities, their attributes, and the relationships between entities. It aids in clarifying the data model and guides the database design process, facilitating efficient communication between stakeholders.`,
+    sub_topic: "Database Design",
+  },
+
+  {
+    question: "What is a dirty read, and how can it be prevented in a database system?",
+    user_answer: "",
+    expected_answer: `A dirty read occurs when one transaction reads uncommitted changes from another transaction. To prevent it, databases use isolation levels like "Read Committed" or higher, which ensure that a transaction only reads committed data, avoiding interference from uncommitted changes.`,
+    sub_topic: "Transactions and Concurrency",
+  },
+
+  {
+    question: "What are phantom reads, and how can they be prevented in a multi-version concurrency control system?",
+    user_answer: "",
+    expected_answer: `
+    Phantom reads occur when a transaction in a multi-version concurrency control system reads a set of data that includes rows that were inserted or deleted by other transactions after the initial read. They can be prevented by employing snapshot isolation techniques, where each transaction reads from a consistent snapshot of the database, ensuring that any changes made by other transactions during its execution are not visible.`,
+    sub_topic: "Transactions and Concurrency",
+  },
+
+  {
+    question: "How does a write-ahead logging protocol contribute to database transaction durability?",
+    user_answer: "",
+    expected_answer: `
+    A write-ahead logging protocol ensures database transaction durability by requiring changes to be written to the log before they are applied to the actual database. This ensures that in the event of a system failure, transactions can be replayed from the log to restore the database to a consistent state.`,
+    sub_topic: "Transactions and Concurrency",
   },
 
   {
@@ -242,7 +226,7 @@ const dbmsEntryTest=[
     user_answer: "",
     expected_answer: `Data fragmentation involves dividing tables or relations into smaller subsets for storage efficiency, often as horizontal (row-wise) or vertical (column-wise) fragments.
      This can optimize storage by allowing data to be distributed across storage devices or nodes, but may increase complexity for query processing due to the need for fragment assembly during retrievals.`,
-    sub_topic: "Database Storage",
+    sub_topic: "Data Storage and Querying",
   },
 
   {
@@ -250,38 +234,36 @@ const dbmsEntryTest=[
       "What is a B-tree, and how is it utilized for efficient data storage and retrieval?",
     user_answer: "",
     expected_answer: "A B-tree is a balanced tree data structure used in databases for efficient data storage and retrieval. It maintains sorted data in nodes, enabling logarithmic time complexity for insertion, deletion, and search operations, making it suitable for indexing and managing large datasets in databases.",
-    sub_topic: "Database Storage",
+    sub_topic: "Data Storage and Querying",
   },
 
   {
-    question: "What are the considerations when choosing between row-based and column-based storage formats?",
+    question: "What role does statistical information about data play in enhancing cost estimation during query optimization?",
     user_answer: "",
-    expected_answer: `When choosing between row-based and column-based storage formats, consider factors like query patterns (analytical vs. transactional), data compression efficiency, and the need for selective retrieval. 
-    Row-based suits transactional workloads due to full-record retrieval, while column-based is ideal for analytics with better compression and selective column access.`,
-    sub_topic: "Database Storage",
+    expected_answer: `Statistical information about data, such as cardinality and distribution, informs the query optimizer about the data's characteristics, enabling it to make informed decisions on index selection, join order, and access methods. This enhances cost estimation accuracy, resulting in more efficient query execution plans.`,
+    sub_topic: "Data Storage and Querying",
   },
 
   {
     question:
-      "Explain the term Data Redundancy.",
+      "How does sharding contribute to scalability in distributed databases?",
     user_answer: "",
-    expected_answer: `Data redundancy refers to the duplication of data within a database, leading to unnecessary storage and potential inconsistencies when updates are made. 
-    It can hinder data integrity and increase maintenance efforts.`,
-    sub_topic: "understanding of Basic terminologies",
+    expected_answer: `Sharding partitions a database into smaller, manageable pieces (shards) distributed across nodes, enabling parallel processing and reducing contention, thereby enhancing scalability in distributed databases. Each shard can be stored on separate servers, allowing the database to handle more data and requests in a coordinated manner.`,
+    sub_topic: "Advanced topics",
   },
   {
-    question: "What does Query Optimization refer to?",
+    question: "How does OQL facilitate querying in object-oriented databases?",
     user_answer: "",
-    expected_answer: `Query optimization refers to the process in a Database Management System (DBMS) where the system analyzes various ways to execute a query and selects the most efficient execution plan, aiming to minimize resource usage and response time while retrieving the required data from the database.
-     This optimization involves considering factors like indexing, join methods, and access paths to enhance the performance of queries.`,
-    sub_topic: "understanding of Basic terminologies",
+    expected_answer: `Object Query Language (OQL) enables querying in object-oriented databases by providing a standardized syntax for expressing queries that retrieve and manipulate objects based on their attributes and relationships. It allows users to navigate and manipulate complex object structures while maintaining the principles of object-oriented modeling.`,
+    sub_topic: "Advanced topics",
   },
   {
-    question: "Explain the difference between a table and a view in a database. ",
+    question: "What role does XML Schema play in ensuring data integrity and validation? ",
     user_answer: "",
     expected_answer: `
-    A table in a database stores actual data as structured rows and columns, while a view is a virtual table that presents a subset of data from one or more tables, offering a dynamic way to access and manipulate data without altering the underlying structure.`,
-    sub_topic: "understanding of Basic terminologies",
+    
+XML Schema defines the structure and constraints of XML data, ensuring data integrity by specifying valid elements and their relationships. It facilitates validation by enabling systems to verify incoming XML against the defined schema, identifying discrepancies and maintaining data accuracy.`,
+    sub_topic: "Advanced topics",
   },
 ];
 
@@ -291,72 +273,45 @@ const dbmsEntryTest=[
 
 const osEntryTest=[
   {
-    question: "Describe the role of an operating system in managing I/O operations for different applications.",
-    user_answer: "",
-    expected_answer: `The operating system oversees I/O operations by mediating access to devices, ensuring fair resource allocation among applications, and buffering data for efficient transfers. 
-    It provides a standardized interface for applications to interact with various hardware devices, abstracting complexities and maintaining data integrity during reads and writes. `,
-    sub_topic: "Application Level Concepts",
-  },
-
-  {
     question:
-      "Explain the concept of process scheduling and how it impacts application responsiveness.",
+      "How does virtualization contribute to efficient resource utilization in operating systems?",
     user_answer: "",
-    expected_answer: `Process scheduling is the mechanism in an operating system that determines the order in which processes are executed on the CPU. 
-    It impacts application responsiveness by ensuring fair CPU utilization, reducing wait times, and maintaining a balanced distribution of resources, thereby preventing one process from monopolizing the CPU and enabling smoother multitasking and quicker user interactions.`,
-    sub_topic: "Application Level Concepts",
+    expected_answer: `Virtualization enables multiple virtual machines to run on a single physical machine, efficiently sharing its resources like CPU, memory, and storage, optimizing utilization and reducing hardware costs. This leads to better resource allocation, scalability, and isolation in operating systems.`,
+    sub_topic: "Operating System Overview",
   },
 
   {
-    question: "Explain how the operating system facilitates process migration across different hardware environments.",
+    question: "Define interrupt and its role in managing hardware events.",
+    user_answer: "",
+    expected_answer: `An interrupt is a signal sent by hardware or software to the CPU, prompting it to temporarily halt its current activities and handle the event. 
+    It plays a crucial role in managing hardware events by enabling the CPU to promptly respond to external events, such as I/O operations, hardware errors, or time-sensitive tasks, improving system efficiency and responsiveness.`,
+    sub_topic: "Operating System Overview",
+  },
+
+  {
+    question: "Explain the difference between multitasking and multiprocessing.",
+    user_answer: "",
+    expected_answer: `Multitasking involves running multiple tasks or processes on a single CPU, quickly switching between them to give the appearance of concurrent execution. 
+    Multiprocessing, on the other hand, utilizes multiple CPUs or cores to execute tasks simultaneously, improving overall system performance by true parallel execution.`,
+    sub_topic: "Operating System Overview",
+  },
+
+  {
+    question: "What challenges can arise in managing processes in a multi-core processor environment?",
     user_answer: "",
     expected_answer: `
-    Operating systems enable process migration by abstracting hardware details, encapsulating processes, and employing network communication to transfer state and execution context, allowing seamless movement between systems. 
-    This supports load balancing, fault tolerance, and resource optimization in distributed environments.`,
-    sub_topic: "Application Level Concepts",
+    Parallelism and Synchronization: Coordinating tasks across multiple cores can lead to issues such as race conditions and deadlocks, as processes must be synchronized to avoid data inconsistencies or contention for shared resources.
+Load Balancing: Efficiently distributing workloads among cores is challenging, as some tasks may be more computationally intensive than others, leading to load imbalances that can degrade overall performance.
+Cache Coherency: Maintaining consistency of data stored in different cores' caches can be complex, requiring protocols to manage data coherence and minimize overhead, which can impact both latency and performance.`,
+    sub_topic: "Process Management",
   },
 
   {
-    question:
-      "Explain the role of a page table in virtual memory systems.",
-    user_answer: "",
-    expected_answer: `A page table is a data structure used in virtual memory systems to map virtual addresses to physical addresses, enabling efficient address translation. 
-    It allows the operating system to manage the illusion of a larger address space than physically available memory by facilitating the translation of virtual memory addresses to their corresponding physical memory locations.`,
-    sub_topic: "Memory Management",
-  },
-
-  {
-    question: "What is thrashing and how can it be avoided in memory management?",
+    question: "How does a round-robin scheduling algorithm distribute CPU time among processes? ",
     user_answer: "",
     expected_answer: `
-    Thrashing occurs when a system spends more time swapping pages in and out of main memory than executing actual processes, severely degrading performance. 
-    It can be avoided by optimizing the degree of multiprogramming, using efficient page replacement algorithms, and employing techniques like working set models to ensure that processes have access to their required pages without excessive swapping.`,
-    sub_topic: "Memory Management",
-  },
-
-  {
-    question: "How does memory allocation differ in a monolithic kernel versus a microkernel-based operating system?",
-    user_answer: "",
-    expected_answer: `
-    In a monolithic kernel, most operating system functions run in a single address space, leading to direct memory access and potential for larger memory footprint, while in a microkernel, only essential services reside in the kernel space, reducing memory usage and improving modularity but possibly increasing inter-process communication overhead.`,
-    sub_topic: "Memory Management",
-  },
-
-  {
-    question: "What are system calls, and how do they enable user programs to interact with the operating system?",
-    user_answer: "",
-    expected_answer: `
-    System calls are interface functions provided by the operating system that allow user programs to request services or resources (e.g., file operations, network communication) that can only be provided by the kernel. 
-    User programs initiate system calls, and the OS switches from user mode to kernel mode to perform the requested operation securely, managing hardware resources and enforcing access controls, before returning control to the user program.`,
-    sub_topic: "Generic Questions",
-  },
-
-  {
-    question: "Explain the difference between a kernel and a shell in an operating system. ",
-    user_answer: "",
-    expected_answer: `The kernel is the core component of the operating system that manages hardware resources and provides essential services to other software. 
-    The shell, on the other hand, is a user interface that interacts with the kernel, allowing users to execute commands and manage processes, files, and applications.`,
-    sub_topic: "Generic Questions",
+    A round-robin scheduling algorithm distributes CPU time by allocating each process an equal time slice or quantum before moving to the next process in a cyclic manner. This ensures that all processes get a fair share of CPU time and prevents any single process from monopolizing the CPU for too long. If a process's time quantum expires, it's moved to the back of the queue to wait its turn again.`,
+    sub_topic: "Process Management",
   },
 
   {
@@ -365,7 +320,34 @@ const osEntryTest=[
     user_answer: "",
     expected_answer: `
     An operating system prevents deadlock by utilizing techniques such as resource allocation graphs or Banker's algorithm to detect and break circular wait conditions, and by employing strategies like resource preemption and process termination to resolve deadlocks and restore system stability.`,
-    sub_topic: "Generic Questions",
+    sub_topic: "Process Management",
+  },
+
+  {
+    question:
+      "What happens when a page that was demand-paged is accessed for the first time?",
+    user_answer: "",
+    expected_answer: `When a demand-paged page is accessed for the first time, a page fault occurs.
+    The operating system identifies this as an attempt to access a page that's not currently in physical memory.
+    It then retrieves the required page from secondary storage (like disk) and updates the page table, allowing the program to continue execution.`,
+    sub_topic: "Storage Management and File System",
+  },
+
+  {
+    question: "What is thrashing and how can it be avoided in memory management?",
+    user_answer: "",
+    expected_answer: `
+    Thrashing occurs when a system spends more time swapping pages in and out of main memory than executing actual processes, severely degrading performance. 
+    It can be avoided by optimizing the degree of multiprogramming, using efficient page replacement algorithms, and employing techniques like working set models to ensure that processes have access to their required pages without excessive swapping.`,
+    sub_topic: "Storage Management and File System",
+  },
+
+  {
+    question: "How does the Belady's Anomaly phenomenon relate to page replacement algorithms?",
+    user_answer: "",
+    expected_answer: `
+Belady's Anomaly is a phenomenon in computer science that occurs when increasing the number of page frames in a cache can unexpectedly lead to an increase in the number of page faults. It is related to page replacement algorithms because certain algorithms, like the Optimal Page Replacement algorithm, can exhibit this anomaly. This challenges the intuitive notion that more memory should always lead to fewer page faults.`,
+    sub_topic: "Storage Management and File System",
   },
 
   {
@@ -374,16 +356,16 @@ const osEntryTest=[
     expected_answer: `
     FAT (File Allocation Table) is simpler, widely compatible, but lacks advanced features like security permissions and journaling. 
     NTFS (New Technology File System) offers enhanced security, larger file sizes, and journaling for better data integrity, but it's more complex and may have compatibility issues on non-Windows systems.`,
-    sub_topic: "File System Management",
+    sub_topic: "I/O Systems",
   },
 
   {
     question:
-      "Discuss the concept of inodes in Unix-like file systems and their role in managing file metadata.",
+      "How does a directory structure contribute to efficient file management and organization?",
     user_answer: "",
-    expected_answer: `In Unix-like file systems, inodes are data structures that store metadata about files, such as permissions, ownership, timestamps, and pointers to data blocks.
-     They play a crucial role in efficient file management by allowing quick access to file attributes and mapping to data blocks, minimizing the need for continuous searching and enhancing overall file system performance.`,
-    sub_topic: "File System Management",
+    expected_answer: `
+    A well-organized directory structure simplifies file management by providing a clear hierarchy, enabling easy categorization and quick access to files, enhancing efficiency and reducing clutter. It streamlines data retrieval, minimizes duplication, and supports systematic organization of content.`,
+    sub_topic: "I/O Systems",
   },
 
   {
@@ -391,30 +373,28 @@ const osEntryTest=[
     user_answer: "",
     expected_answer: `File systems handle data recovery by implementing features like backup copies, versioning, and journaling. 
     These mechanisms allow for the restoration of previous file states or the reconstruction of lost data from backup points or transaction logs in case of accidental deletion or corruption.`,
-    sub_topic: "File System Management",
+    sub_topic: "I/O Systems",
   },
 
   {
     question:
-      "What is the role of a process in an operating system?",
+      "What is vMotion in VMware and what purpose does it serve?",
     user_answer: "",
-    expected_answer: `A process in an operating system represents an executing program, consisting of code, data, and resources. 
-    It's the fundamental unit of work, enabling multitasking, resource allocation, and parallel execution, managed by the OS to achieve efficient utilization of system resources.`,
-    sub_topic: "understanding of Basic terminologies",
+    expected_answer: `vMotion is a feature in VMware's virtualization technology that enables live migration of running virtual machines (VMs) between physical hosts within a virtualized datacenter. It serves the purpose of enhancing workload flexibility, resource optimization, and hardware maintenance by allowing seamless movement of VMs without downtime. This helps ensure high availability, load balancing, and efficient resource utilization in virtualized environments.`,
+    sub_topic: "Case Study",
   },
   {
-    question: "Define interrupt and its role in managing hardware events.",
+    question: "Explain the concept of containerization in the context of a multifunction server.",
     user_answer: "",
-    expected_answer: `An interrupt is a signal sent by hardware or software to the CPU, prompting it to temporarily halt its current activities and handle the event. 
-    It plays a crucial role in managing hardware events by enabling the CPU to promptly respond to external events, such as I/O operations, hardware errors, or time-sensitive tasks, improving system efficiency and responsiveness.`,
-    sub_topic: "understanding of Basic terminologies",
+    expected_answer: `Containerization is a method of packaging and isolating applications, along with their dependencies and configurations, into portable units called containers. In a multifunction server, containerization allows different services or functions to run in separate containers, ensuring resource isolation and easy deployment while avoiding conflicts between applications. This enhances scalability, efficiency, and system management.`,
+    sub_topic: "Case Study",
   },
   {
-    question: "Explain the difference between multitasking and multiprocessing.",
+    question: "How does the architecture of iOS differ from that of Android?",
     user_answer: "",
-    expected_answer: `Multitasking involves running multiple tasks or processes on a single CPU, quickly switching between them to give the appearance of concurrent execution. 
-    Multiprocessing, on the other hand, utilizes multiple CPUs or cores to execute tasks simultaneously, improving overall system performance by true parallel execution.`,
-    sub_topic: "understanding of Basic terminologies",
+    expected_answer: `
+    iOS architecture is based on a closed ecosystem, designed by Apple. It follows a streamlined and consistent hardware-software integration. Android, on the other hand, is open-source, allowing diverse hardware and UI customizations, leading to greater fragmentation in the ecosystem.`,
+    sub_topic: "Case Study",
   },
 ];
 
