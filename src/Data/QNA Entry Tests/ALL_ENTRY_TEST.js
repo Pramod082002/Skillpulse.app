@@ -418,6 +418,8 @@ const osEntryTest=[
   },
 ];
 
-export {cnEntryTest}
-export {dbmsEntryTest}
-export {osEntryTest}
+export {
+  cnEntryTest,
+  dbmsEntryTest,
+  osEntryTest
+}

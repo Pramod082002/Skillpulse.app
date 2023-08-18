@@ -39,24 +39,7 @@ const getQuestionSet = (moduleName,subjectName,testType) =>{
 
 
 function makeReqObject(questions,subjectName){
-
-  /*
-  template response object
-  {
-    "UserAnswer": 
-      {
-        "DBMS": 
-          {
-            "1": "It is a collection of data in some structured manner to enable users to easily access, manage, and store information.",
-            "2": "Normalization is employed to standardize database tables or merge values that exhibit similarities based on specified criteria.",
-            "3": "The primary key serves as the anchor for a composition. Just as a song revolves around its central theme, a primary key secures the database journey.",
-            "4": "Indexes are data structures used to optimize data retrieval speed in a table, working akin to book indexes.",
-            "5": "A foreign key is a field that refers to the primary key in another table, creating links between related data."
-          }
-      }
-  }
-  */
-
+  
   var userAnswerObject = {}, tempUserAnswerObject = {}
 
   var questionNumber = 1;
@@ -77,56 +60,6 @@ function makeReqObject(questions,subjectName){
   return userAnswerObject;
 }
 
-// function updateTheGraphData(data){
-//   var subject = Object.keys(data.scores)[0];
-//   var sumFinalScores = 0;
-//   Object.values(data.scores.final_score).forEach((val)=>{
-//     sumFinalScores += val
-//   })
-
-//   //since graph prints for 10 only
-//   // console.log(((sumFinalScores/5)/100)*10)
-
-//   TestTotalMarks[subject] = (((sumFinalScores/5)/100)*10);
-//   handleNavigate();
-// }
-
-// function hitServer(reqObj){
-
-//   async function fetchData() {
-//     try {
-//       const response = await fetch('http://127.0.0.1:8000/api/GetRating/', {
-//         method: 'POST',
-//         headers: {
-//           'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify(reqObj)
-//       });
-  
-//       if (!response.ok) {
-//         throw new Error('Network response was not ok');
-//       }
-  
-//       const data = await response.json();
-//       return data;
-//     } catch (error) {
-//       console.error('Error fetching data:', error);
-//       return null;
-//     }
-//   }
-  
-//   async function mainReq() {
-//     const data = await fetchData();
-//     if (data) {
-//       console.log('Fetched data Yo :', data);
-//       updateTheGraphData(data);
-//     }
-//   }
-  
-//   mainReq();
-  
-// }
-
 const TestQNA = () => {
 
   const { moduleName, subjectName, testType } = useParams();
@@ -138,21 +71,12 @@ const TestQNA = () => {
   function updateTheGraphData(data){
     var subject = Object.keys(data.scores)[0].toUpperCase();
 
-    console.log('subject to access',subject);
-    console.log('subject to access test history',TestTotalMarks[subject]);
     var sumFinalScores = 0;
     Object.values(data.scores.final_score).forEach((val)=>{
       sumFinalScores += val
     })
 
-
-  
-    //since graph prints for 10 only
-    // console.log(((sumFinalScores/5)/100)*10)
-
     var retFinalSum = parseInt((((sumFinalScores/5)/100)*10))
-
-    console.log('my marks',retFinalSum);
   
     // assuming m2 only uses backend
     TestTotalMarks.m2[subject] = retFinalSum;
@@ -216,11 +140,8 @@ const TestQNA = () => {
   const handleSubmit = () => {
     //send the request here, loading bar and update in dashboard, connect react chart
 
-    console.log('inside handle submit',subjectName)
-
     //create a request object
     var reqObj = makeReqObject(questions,subjectName);
-    console.log(reqObj," is the request object")
 
     //major part, hitting the backend endpoint
     var response = hitServer(reqObj);

@@ -402,7 +402,9 @@ const osExitTest=[
   },
 ];
   
-  export {cnExitTest}
-  export {dbmsExitTest}
-  export {osExitTest}
+export {
+  cnExitTest,
+  dbmsExitTest,
+  osExitTest
+}
   
