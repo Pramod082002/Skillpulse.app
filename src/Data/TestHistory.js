@@ -47,9 +47,9 @@ var TestTotalMarks = {
         m1: {
             "c/c++": {
                 "Basic Syntax and Language Fundamentals": -1,
-                "Functions and Scope": -1,
+                "Functions and Scope": 65,
                 "Arrays and Pointers": -1,
-                "Object-Oriented Programming (C++)": -1,
+                "Object-Oriented Programming (C++)": 80,
                 "File Handling and Input/Output": -1,
                 totalMarks: -1,
             },
@@ -110,7 +110,7 @@ var TestTotalMarks = {
             "c/c++": {
                 "Basic Syntax and Language Fundamentals": -1,
                 "Functions and Scope": -1,
-                "Arrays and Pointers": -1,
+                "Arrays and Pointers": 50,
                 "Object-Oriented Programming (C++)": -1,
                 "File Handling and Input/Output": -1,
                 totalMarks: -1,
@@ -119,7 +119,7 @@ var TestTotalMarks = {
                 inheritance: -1,
                 polymorphism: -1,
                 encapsulation: -1,
-                abstraction: -1,
+                abstraction: 32,
                 interfaces: -1,
                 totalMarks: 4,
             },  
