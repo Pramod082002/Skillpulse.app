@@ -62,7 +62,6 @@ function Dashboard() {
   };
 
   const handleClose = () => {
-    setOpen(false);
 
     //takeTest, redirect to test with params
     console.log(takeTest.join('/'))
@@ -71,7 +70,12 @@ function Dashboard() {
     const subjectName = takeTest[1];
     const testType = takeTest[2]; // Replace with your dynamic value
     console.log('Navigation done ',`/test/${moduleName}/${subjectName}/${testType}`)
-    navigate(`/test/${moduleName}/${subjectName}/${testType}`);
+
+    if(moduleName!=="" && subjectName!=="" && testType!==""){
+      navigate(`/test/${moduleName}/${subjectName}/${testType}`);  
+    }
+
+    setOpen(false);
   };
 
   const getCombinedChoices = (module,subject,test) =>{
@@ -136,7 +140,7 @@ function Dashboard() {
               <Toolbar>
                 <IconButton
                   color="inherit"
-                  onClick={handleClose}
+                  onClick={() => setOpen(false)}
                 >
                   <CloseIcon />
                 </IconButton>
@@ -144,7 +148,7 @@ function Dashboard() {
                   Choose Test Modules
                 </Typography>
                 <Button color="inherit" variant="p" onClick={handleClose}>
-                  save
+                  Take Test
                 </Button>
               </Toolbar>
             </AppBar>

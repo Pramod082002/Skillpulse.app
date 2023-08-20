@@ -31,7 +31,7 @@ function GraphModule({testAnalysisModule}) {
       .concat(Object.keys(TestTotalMarks?.entryTest?.m2 || {}))
       .forEach((key) => {
         if (TestTotalMarks.entryTest.m1[key]?.totalMarks > -1 || TestTotalMarks.entryTest.m2[key]?.totalMarks > -1) {
-          tempEntrySubjects.push(key);
+          tempEntrySubjects.push(key.toUpperCase());
           tempEntryMarks.push(TestTotalMarks.entryTest.m1[key]?.totalMarks || TestTotalMarks.entryTest.m2[key]?.totalMarks);
         }
       });
@@ -45,7 +45,7 @@ function GraphModule({testAnalysisModule}) {
       .concat(Object.keys(TestTotalMarks?.exitTest?.m2 || {}))
       .forEach((key) => {
         if (TestTotalMarks.exitTest.m1[key]?.totalMarks > -1 || TestTotalMarks.exitTest.m2[key]?.totalMarks > -1) {
-          tempExitSubjects.push(key);
+          tempExitSubjects.push(key.toUpperCase());
           tempExitMarks.push(TestTotalMarks.exitTest.m1[key]?.totalMarks || TestTotalMarks.exitTest.m2[key]?.totalMarks);
         }
       });

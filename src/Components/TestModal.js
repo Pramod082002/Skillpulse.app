@@ -45,8 +45,12 @@ export default function TextCarousel({getCombinedChoices}) {
       <Paper elevation={3} style={{ padding: '20px' }}>
 
         <Typography variant="p" style={{ color: '#6b6b6b' }}>
-          ROUTE : {userChoiceModule.toUpperCase()} / {userChoiceSubject.toUpperCase()} / {userChoiceTest.toUpperCase()}
+          ROUTE :
+          {userChoiceModule && ` ${userChoiceModule.toUpperCase()}`}
+          {userChoiceSubject && ` / ${userChoiceSubject.toUpperCase()}`}
+          {userChoiceTest && ` / ${userChoiceTest.toUpperCase()}`}
         </Typography>
+
         {/* change choice of test if module is selected */}
         <CarousalModules changeChoiceModuleCallback={changeChoiceModuleCallback} changeChoiceSubjectCallback={changeChoiceSubjectCallback} changeChoiceTestCallback={changeChoiceTestCallback} />
         <CarousalSubjects userChoiceModule={userChoiceModule} changeChoiceSubjectCallback={changeChoiceSubjectCallback} />
