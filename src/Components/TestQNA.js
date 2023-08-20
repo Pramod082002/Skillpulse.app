@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Container, Card, CardContent, TextField, Button } from '@mui/material';
 import TestTitleCard from './TestTitleCard';
 
-import { cnEntryTest } from '../Data/QNA Entry Tests/ALL_ENTRY_TEST';
-import { cnExitTest } from '../Data/QNA Entry Tests/ALL_EXIT_TEST'; 
+import { cnEntryTest,dbmsEntryTest,osEntryTest } from '../Data/QNA Entry Tests/ALL_ENTRY_TEST';
+import { cnExitTest,dbmsExitTest,osExitTest } from '../Data/QNA Entry Tests/ALL_EXIT_TEST'; 
 import { useParams } from 'react-router-dom';
 import { TestTotalMarks } from '../Data/TestHistory'
 import { useNavigate } from 'react-router-dom';
@@ -19,6 +19,12 @@ const getQuestionSet = (moduleName,subjectName,testType) =>{
       case 'cn':
         finalans = cnEntryTest; 
         break;
+      case 'dbms':
+        finalans = dbmsEntryTest; 
+        break;
+      case 'os':
+        finalans = osEntryTest; 
+        break;
       default:
         finalans = [];
     }
@@ -28,6 +34,12 @@ const getQuestionSet = (moduleName,subjectName,testType) =>{
     switch(subjectName) {
       case 'cn':
         finalans = cnExitTest; 
+        break;
+      case 'dbms':
+        finalans = dbmsExitTest; 
+        break;
+      case 'os':
+        finalans = osExitTest; 
         break;
       default:
         finalans = [];
@@ -79,7 +91,7 @@ const TestQNA = () => {
     var retFinalSum = parseInt((((sumFinalScores/5)/100)*10))
   
     // assuming m2 only uses backend
-    TestTotalMarks.m2[subject] = retFinalSum;
+    TestTotalMarks[testType].m2[subject] = retFinalSum;
     handleNavigate();
   }
   

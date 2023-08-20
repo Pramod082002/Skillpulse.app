@@ -1,38 +1,38 @@
 var TestModulesHistory = {
     m1 : {
-        s1 : {
+        "c/c++" : {
             subjectName : "C/C++",
             entryTest : false,
             exitTest : false,
         },
-        s2 : {
+        "java" : {
             subjectName : "JAVA",
             entryTest : false,
             exitTest : false,
         },
-        s3 : {
+        "oops" : {
             subjectName : "OOPS",
             entryTest : false,
             exitTest : false,
         },
-        s4 : {
+        "dsa" : {
             subjectName : "DSA",
             entryTest : false,
             exitTest : false,
         }
     },
     m2 : {
-        s1 : {
+        "dbms" : {
             subjectName : "DBMS",
             entryTest : false,
             exitTest : false,
         },
-        s2 : {
+        "cn" : {
             subjectName : "CN",
             entryTest : true,
             exitTest : false,
         },
-        s3 : {
+        "os" : {
             subjectName : "OS",
             entryTest : false,
             exitTest : false,
@@ -46,11 +46,11 @@ var TestTotalMarks = {
     entryTest : {
         m1: {
             "c/c++": {
-                datatypes: -1,
-                functions: -1,
-                switch: -1,
-                loops: -1,
-                pointers: -1,
+                "Basic Syntax and Language Fundamentals": -1,
+                "Functions and Scope": -1,
+                "Arrays and Pointers": -1,
+                "Object-Oriented Programming (C++)": -1,
+                "File Handling and Input/Output": -1,
                 totalMarks: -1,
             },
             java: {
@@ -59,7 +59,7 @@ var TestTotalMarks = {
                 encapsulation: -1,
                 abstraction: -1,
                 interfaces: -1,
-                totalMarks: -1,
+                totalMarks: 5,
             },  
             oops: {
                 classes: -1,
@@ -67,7 +67,7 @@ var TestTotalMarks = {
                 constructors: -1,
                 methods: -1,
                 inheritance: -1,
-                totalMarks: -1,
+                totalMarks: 7,
             },
             dsa: {
                 arrays: -1,
@@ -80,39 +80,39 @@ var TestTotalMarks = {
         },
         m2: {
             cn: {
-                "Application Level Concepts": -1,
-                "Hardware Concepts": -1,
-                "Generic Questions": -1,
-                "Data Transportation": -1,
-                "understanding of Basic terminologies": -1,
-                totalMarks: -1,
+                "Introduction and Physical layer": -1,
+                "Data link layer and LAN": -1,
+                "Network and Routing": -1,
+                "Transport layer": -1,
+                "Application layer": -1,
+                totalMarks: 3,
             },
             dbms: {
-                normalization: -1,
-                indexing: -1,
-                transactions: -1,
-                sql: -1,
-                erDiagrams: -1,
+                "Relational Databases": -1,
+                "Database Design": -1,
+                "Transactions and Concurrency": -1,
+                "Data Storage and Querying": -1,
+                "Advanced topics": -1,
                 totalMarks: -1,
             },
             os: {
-                processes: -1,
-                memoryManagement: -1,
-                fileSystems: -1,
-                scheduling: -1,
-                synchronization: -1,
-                totalMarks: -1,
+                "Operating System Overview": -1,
+                "Process Management": -1,
+                "Storage Management and File System": -1,
+                "I/O Systems": -1,
+                "Case Study": -1,
+                totalMarks: 4,
             },
         },
     },
     exitTest : {
         m1: {
             "c/c++": {
-                datatypes: -1,
-                functions: -1,
-                switch: -1,
-                loops: -1,
-                pointers: -1,
+                "Basic Syntax and Language Fundamentals": -1,
+                "Functions and Scope": -1,
+                "Arrays and Pointers": -1,
+                "Object-Oriented Programming (C++)": -1,
+                "File Handling and Input/Output": -1,
                 totalMarks: -1,
             },
             java: {
@@ -121,7 +121,7 @@ var TestTotalMarks = {
                 encapsulation: -1,
                 abstraction: -1,
                 interfaces: -1,
-                totalMarks: -1,
+                totalMarks: 4,
             },  
             oops: {
                 classes: -1,
@@ -137,52 +137,52 @@ var TestTotalMarks = {
                 stacks: -1,
                 queues: -1,
                 trees: -1,
-                totalMarks: -1,
+                totalMarks: 5,
             },
         },
         m2: {
             cn: {
-                "Application Level Concepts": -1,
-                "Hardware Concepts": -1,
-                "Generic Questions": -1,
-                "Data Transportation": -1,
-                "understanding of Basic terminologies": -1,
+                "Introduction and Physical layer": -1,
+                "Data link layer and LAN": -1,
+                "Network and Routing": -1,
+                "Transport layer": -1,
+                "Application layer": -1,
                 totalMarks: -1,
             },
             dbms: {
-                normalization: -1,
-                indexing: -1,
-                transactions: -1,
-                sql: -1,
-                erDiagrams: -1,
+                "Relational Databases": -1,
+                "Database Design": -1,
+                "Transactions and Concurrency": -1,
+                "Data Storage and Querying": -1,
+                "Advanced topics": -1,
                 totalMarks: -1,
             },
             os: {
-                processes: -1,
-                memoryManagement: -1,
-                fileSystems: -1,
-                scheduling: -1,
-                synchronization: -1,
+                "Operating System Overview": -1,
+                "Process Management": -1,
+                "Storage Management and File System": -1,
+                "I/O Systems": -1,
+                "Case Study": -1,
                 totalMarks: -1,
             },
         },
-    }
+    },
 };
 
 
 //for graph
-var TestTotalMarks = {
-    m1 : {
-        "C/C++" : 7, 
-        "JAVA" : -1,
-        "OOPS" : 9,
-        "DSA" : 9,
-    },
-    m2 : {
-        "CN" : 0, 
-        "DBMS" : 9,
-        "OS" : -1,
-    },
-}
+// var TestTotalMarks = {
+//     m1 : {
+//         "c/c++" : 7, 
+//         "java" : -1,
+//         "oops" : 9,
+//         "dsa" : 9,
+//     },
+//     m2 : {
+//         "cn" : 0, 
+//         "dbms" : 9,
+//         "os" : -1,
+//     },
+// }
 
 export {TestModulesHistory,TestTotalMarks}

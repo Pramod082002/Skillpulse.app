@@ -2,63 +2,118 @@ import React, { useEffect,useState } from 'react'
 import { BarChart } from '@mui/x-charts/BarChart';
 import { Card, CardContent, Typography } from '@mui/material';
 import { TestTotalMarks } from '../Data/TestHistory';
+import { TestModulesHistory } from '../Data/TestHistory';
+import EmptyGraphBackground from './EmptyGraphBackground';
 
-function GraphModule() {
+function GraphModule({testAnalysisModule}) {
 
-  const [subjects,changeSubjects] = useState([]);
-  const [marks,changeMarks] = useState([]);
+  //entry test
+  const [subjectsEntryTest,changeEntryTestSubjects] = useState([]);
+  const [marksEntryTest,changeEntryTestMarks] = useState([]);
 
-
-  useEffect(()=>{
-    let emptyIndices = []
-    var tempMarks = Object.values(TestTotalMarks?.m1 || {})
-    .concat(Object.values(TestTotalMarks?.m2 || {}))
-    .filter((val,index) => {
-      if(val > -1) emptyIndices.push(index)
-      return val > -1;
-    });
-
-    var tempSubjects = Object.keys(TestTotalMarks?.m1 || {})
-    .concat(Object.keys(TestTotalMarks?.m2 || {}))
-    .filter((val,index) => {
-      return emptyIndices.includes(index);
-    });    
-
-    changeMarks(tempMarks);
-    changeSubjects(tempSubjects);
-  },[])
+  //exit test
+  const [subjectsExitTest,changeExitTestSubjects] = useState([]);
+  const [marksExitTest,changeExitTestMarks] = useState([]);  
 
   // tests not taken will be represented as -1
   // have to connect that too
   // connect -1 in graph module to testHistory
   // hardcoded marks
 
+
+  useEffect(() => {
+
+    console.log(testAnalysisModule)
+  
+    // For entry test 
+    var tempEntrySubjects = [], tempEntryMarks = [];
+    Object.keys(TestTotalMarks?.entryTest?.m1 || {})
+      .concat(Object.keys(TestTotalMarks?.entryTest?.m2 || {}))
+      .forEach((key) => {
+        if (TestTotalMarks.entryTest.m1[key]?.totalMarks > -1 || TestTotalMarks.entryTest.m2[key]?.totalMarks > -1) {
+          tempEntrySubjects.push(key);
+          tempEntryMarks.push(TestTotalMarks.entryTest.m1[key]?.totalMarks || TestTotalMarks.entryTest.m2[key]?.totalMarks);
+        }
+      });
+  
+    changeEntryTestMarks(tempEntryMarks);
+    changeEntryTestSubjects(tempEntrySubjects);
+  
+    // For exit test
+    var tempExitSubjects = [], tempExitMarks = [];
+    Object.keys(TestTotalMarks?.exitTest?.m1 || {})
+      .concat(Object.keys(TestTotalMarks?.exitTest?.m2 || {}))
+      .forEach((key) => {
+        if (TestTotalMarks.exitTest.m1[key]?.totalMarks > -1 || TestTotalMarks.exitTest.m2[key]?.totalMarks > -1) {
+          tempExitSubjects.push(key);
+          tempExitMarks.push(TestTotalMarks.exitTest.m1[key]?.totalMarks || TestTotalMarks.exitTest.m2[key]?.totalMarks);
+        }
+      });
+  
+    changeExitTestMarks(tempExitMarks);
+    changeExitTestSubjects(tempExitSubjects);
+
+    console.log(subjectsEntryTest)
+    console.log(subjectsExitTest)
+
+  }, []);
+  
+
   return (
     <Card sx={{margin:'10px'}}>
-      <CardContent>
-        <div>
-          { 
-            (subjects.length>0 && marks.length>0) ? (
-              <BarChart
-                xAxis={[
-                {
-                    id: 'Score-Graph-Representation',
-                    data: subjects,
-                    scaleType: 'band',
-                },
-                ]}
-                series={[
-                {
-                    data: marks,
-                },
-                ]}
-                width={400}
-                height={400}
-              />
-            ) : (<h1>NO Test Taken</h1>)
-          }
-        </div>
-      </CardContent>
+    { 
+      (testAnalysisModule==='entry test') ? (
+        <CardContent>
+          <div>
+            { 
+              (subjectsEntryTest.length>0 && marksEntryTest.length>0) ? (
+                <BarChart
+                  xAxis={[
+                  {
+                      id: 'Score-Graph-Representation',
+                      data: subjectsEntryTest,
+                      scaleType: 'band',
+                  },
+                  ]}
+                  series={[
+                  {
+                      data: marksEntryTest,
+                  },
+                  ]}
+                  width={400}
+                  height={400}
+                />
+              ) : (<EmptyGraphBackground />)
+            }
+          </div>
+        </CardContent>
+      ) : (
+        <CardContent>
+          <div>
+            { 
+              (subjectsExitTest.length>0 && marksExitTest.length>0) ? (
+                <BarChart
+                  xAxis={[
+                  {
+                      id: 'Score-Graph-Representation',
+                      data: subjectsExitTest,
+                      scaleType: 'band',
+                  },
+                  ]}
+                  series={[
+                  {
+                      data: marksExitTest,
+                  },
+                  ]}
+                  width={400}
+                  height={400}
+                />
+              ) : (<EmptyGraphBackground />)
+            }
+          </div>
+        </CardContent>
+      )
+    }
     </Card>
   )
 }

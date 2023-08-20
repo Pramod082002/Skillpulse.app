@@ -5,7 +5,7 @@ const Home = () => {
   return (
     <div>
       <Navbar />
-      <section class="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-8 mt-12">
+      <section className="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-8 mt-12">
         <div className="">
           <section>
             <div className="mx-auto max-w-screen-xl px-4 py-32 lg:flex lg:items-center">

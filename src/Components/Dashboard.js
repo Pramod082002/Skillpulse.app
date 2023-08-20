@@ -18,7 +18,7 @@ import {
 } from '@mui/material';
 
 import TestModal from '../Components/TestModal'
-
+import TestSwitch from './TestSwitch';
 import CloseIcon from '@mui/icons-material/Close';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { grey } from '@mui/material/colors';
@@ -47,6 +47,15 @@ function Dashboard() {
 
   const [open, setOpen] = useState(false); //to open and close the modal
   const [takeTest,changeTakeTest] = useState([]);
+
+  
+  const [testAnalysisModule,changeTestAnalysisModule] = useState("entry test");
+
+  //call back to get test type
+  const changeTestAnalysisModuleCallback = (newchoice) =>{
+    console.log('change here')
+    changeTestAnalysisModule(newchoice.test);
+  }
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -79,6 +88,7 @@ function Dashboard() {
 
         <div style={{ display: 'flex', alignItems: 'center',  justifyContent:'center'}}>
           <h1 className="font-Pacifico">Dashboard</h1>  
+          <TestSwitch style={{alignSelf: 'flex-end'}} changeTestAnalysisModuleCallback={changeTestAnalysisModuleCallback}/>
         </div>  
 
         <div sx={{position:'relative'}}>
@@ -88,7 +98,7 @@ function Dashboard() {
         </div>
 
         <div className='Score-Graph-Representation'>
-          <GraphModule />
+          <GraphModule testAnalysisModule={testAnalysisModule} />
         </div>
 
         <div sx={{position:'relative', borderBottomWidth: 0}}>
@@ -99,16 +109,7 @@ function Dashboard() {
 
         {/* Predefined score rep json from DATA, also the comments */}
         
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%' }}>
-          <Card sx={{ height: 300, width: 300, textAlign:'center', margin:'30px' }}>
-            <CardContent sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%' }}>
-              <div className='Score-Text-Representation'>
-                <Typography variant="h6">TAKE AT LEAST ONE TEST TO VIEW ANALYTICS</Typography>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-        {/* <ModuleAnalysis /> */}
+        <ModuleAnalysis testAnalysisModule={testAnalysisModule} />
         
         <div sx={{position:'relative', borderBottomWidth: 0}}>
           <Divider variant='middle'>
