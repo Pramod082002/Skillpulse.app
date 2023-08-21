@@ -74,7 +74,7 @@ export default function SingleSubjectCard({singleSubject,subjectName}) {
                 {/* Upper div to handle all the divs below */}
 
 
-                <div className="Not Rendering">
+                <div className="Subtopic Rating">
                   {subtopicsName.map((eachTopic, index) => (
                     <div 
                       key={index} 
