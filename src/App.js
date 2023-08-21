@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import TestQNA from './Components/TestQNA';
 import { cnEntryTest } from './Data/QNA Entry Tests/ALL_ENTRY_TEST';
 import Home from './Components/Home';
+import Login from './Components/Login';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="*" element={<h1>404 PAGE NOT FOUND</h1>} />
         </Route>
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/test" element={<TestQNA />} />
         <Route path="/test/:moduleName/:subjectName/:testType" element={<TestQNA />} />
       </Routes>
