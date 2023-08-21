@@ -36,7 +36,7 @@ export default function SingleSubjectCard({singleSubject,subjectName}) {
   return (
     <div>
     {
-      (subtopicsName.length > 0) ? ( 
+      subtopicsName.length > 0 && 
         <Card>
           <CardHeader
             title={
@@ -74,34 +74,31 @@ export default function SingleSubjectCard({singleSubject,subjectName}) {
                 {/* Upper div to handle all the divs below */}
 
 
-                {
-                    subtopicsName.map((eachTopic,index)=>{
-                        <div 
-                            style={{
-                                display: "flex",
-                                justifyContent: "space-around"
-                            }}
-                        >
-                            <Typography paragraph>{eachTopic.toUpperCase()}</Typography>
-                            <Rating
-                                name="custom-rating"
-                                value={(subjectName[eachTopic]/100)*5}
-                                precision={0.1} // Increase precision for smoother rating display
-                                readOnly
-                            />
-                        </div>                    
-                    })
-                }
-                
+                <div className="Not Rendering">
+                  {subtopicsName.map((eachTopic, index) => (
+                    <div 
+                      key={index} 
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-around"
+                      }}
+                    >
+                      <Typography paragraph>{eachTopic.toUpperCase()}</Typography>
+                      <Rating
+                        name="custom-rating"
+                        value={(singleSubject[eachTopic] / 100) * 5}
+                        precision={0.1} // Increase precision for smoother rating display
+                        readOnly
+                      />
+                    </div>                    
+                  ))}
+                </div>
+
+
               </div>
             </CardContent>
           </Collapse>
         </Card>    
-      ) : (
-
-        <></>
-
-      )
   
     }
     </div>
