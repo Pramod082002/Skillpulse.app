@@ -47,9 +47,9 @@ var TestTotalMarks = {
         m1: {
             "c/c++": {
                 "Basic Syntax and Language Fundamentals": -1,
-                "Functions and Scope": 65,
+                "Functions and Scope": -1,
                 "Arrays and Pointers": -1,
-                "Object-Oriented Programming (C++)": 80,
+                "Object-Oriented Programming (C++)": -1,
                 "File Handling and Input/Output": -1,
                 totalMarks: -1,
             },
@@ -59,7 +59,7 @@ var TestTotalMarks = {
                 encapsulation: -1,
                 abstraction: -1,
                 interfaces: -1,
-                totalMarks: 5,
+                totalMarks: -1,
             },  
             oops: {
                 classes: -1,
@@ -67,7 +67,7 @@ var TestTotalMarks = {
                 constructors: -1,
                 methods: -1,
                 inheritance: -1,
-                totalMarks: 7,
+                totalMarks: -1,
             },
             dsa: {
                 arrays: -1,
@@ -85,7 +85,7 @@ var TestTotalMarks = {
                 "Network and Routing": -1,
                 "Transport layer": -1,
                 "Application layer": -1,
-                totalMarks: 3,
+                totalMarks: -1,
             },
             dbms: {
                 "Relational Databases": -1,
@@ -101,7 +101,7 @@ var TestTotalMarks = {
                 "Storage Management and File System": -1,
                 "I/O Systems": -1,
                 "Case Study": -1,
-                totalMarks: 4,
+                totalMarks: -1,
             },
         },
     },
@@ -110,7 +110,7 @@ var TestTotalMarks = {
             "c/c++": {
                 "Basic Syntax and Language Fundamentals": -1,
                 "Functions and Scope": -1,
-                "Arrays and Pointers": 50,
+                "Arrays and Pointers": -1,
                 "Object-Oriented Programming (C++)": -1,
                 "File Handling and Input/Output": -1,
                 totalMarks: -1,
@@ -119,9 +119,9 @@ var TestTotalMarks = {
                 inheritance: -1,
                 polymorphism: -1,
                 encapsulation: -1,
-                abstraction: 32,
+                abstraction: -1,
                 interfaces: -1,
-                totalMarks: 4,
+                totalMarks: -1,
             },  
             oops: {
                 classes: -1,
@@ -137,7 +137,7 @@ var TestTotalMarks = {
                 stacks: -1,
                 queues: -1,
                 trees: -1,
-                totalMarks: 5,
+                totalMarks: -1,
             },
         },
         m2: {

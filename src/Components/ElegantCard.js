@@ -13,10 +13,15 @@ const ElegantCard = styled(Card)(({ theme }) => ({
   border: `1px solid black`,
   background: 'white',
   margin: '10px',
-  transition: 'transform 0.3s ease', // Transition on hover
+  background: 'linear-gradient(to bottom, white, lightgray)',
+  // boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)',
+  transition: 'transform 0.3s ease, background 0.3s ease, border-color 0.3s ease', // Transition on hover
   '&:hover': {
     transform: 'scale(1.05)', // Increase scale on hover
-    cursor: 'pointer' 
+    cursor: 'pointer',
+    background: 'black', // Change background color on hover
+    borderColor: 'white', // Change border color on hover
+    color: 'white', // Change text color on hover
   },
 }));
 

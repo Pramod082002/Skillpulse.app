@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 const getQuestionSet = (moduleName,subjectName,testType) =>{
 
 
-  if(testType === 'entry test'){
+  if(testType === 'entryTest'){
 
     var finalans = [];
 
@@ -30,7 +30,7 @@ const getQuestionSet = (moduleName,subjectName,testType) =>{
     }
   }
   
-  if(testType === 'exit test'){
+  if(testType === 'exitTest'){
     switch(subjectName) {
       case 'cn':
         finalans = cnExitTest; 
@@ -81,7 +81,7 @@ const TestQNA = () => {
   const navigate = useNavigate();
 
   function updateTheGraphData(data){
-    var subject = Object.keys(data.scores)[0].toUpperCase();
+    var subject = Object.keys(data.scores)[0];
 
     var sumFinalScores = 0;
     Object.values(data.scores.final_score).forEach((val)=>{
@@ -91,7 +91,8 @@ const TestQNA = () => {
     var retFinalSum = parseInt((((sumFinalScores/5)/100)*10))
   
     // assuming m2 only uses backend
-    TestTotalMarks[testType].m2[subject] = retFinalSum;
+    TestTotalMarks[testType].m2[subject].totalMarks = retFinalSum;
+    console.log('finalllllllll sum',retFinalSum)
     handleNavigate();
   }
   
@@ -99,6 +100,8 @@ const TestQNA = () => {
   
     async function fetchData() {
       try {
+        navigate('/loading');
+
         const response = await fetch('http://127.0.0.1:8000/api/GetRating/', {
           method: 'POST',
           headers: {
@@ -110,11 +113,11 @@ const TestQNA = () => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
-    
+        
         const data = await response.json();
         return data;
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error('Error fetching data:');
         return null;
       }
     }
@@ -124,6 +127,7 @@ const TestQNA = () => {
       if (data) {
         console.log('Fetched data Yo :', data);
         updateTheGraphData(data);
+        //navigate('/dashboard');
       }
     }
     

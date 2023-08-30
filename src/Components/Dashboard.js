@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import GraphModule from './GraphModule';
 import {
   Button,
@@ -23,6 +23,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { grey } from '@mui/material/colors';
 import '../Styles/DashboardStyles.css'
+import { TestTotalMarks } from '../Data/TestHistory';
 
 
 import { useNavigate } from 'react-router-dom';
@@ -41,6 +42,35 @@ const theme = createTheme({
   },
 });
 
+function updateTestHistory(token){
+  console.log('sending',token)
+  fetch('http://localhost:8000/api/dbaccess/get-test-mark/', {
+    method: 'GET',  // HTTP method
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization' : ('Token '+token)
+    },
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json(); // Parse response body as JSON
+  })
+  .then(data => {
+    // Handle the parsed data
+    //console.log('Getting Data:', data);
+    //console.log('total marks',TestTotalMarks)
+    console.log('data',data)
+
+    TestTotalMarks = data
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
+  
+}
+
 function Dashboard() {
 
   const navigate = useNavigate();
@@ -49,7 +79,14 @@ function Dashboard() {
   const [takeTest,changeTakeTest] = useState([]);
 
   
-  const [testAnalysisModule,changeTestAnalysisModule] = useState("entry test");
+  const [testAnalysisModule,changeTestAnalysisModule] = useState("entryTest");
+
+  //mounting call to mongo db
+  useEffect(()=>{
+
+    //updateTestHistory(sessionStorage.getItem('myToken'))
+
+  },[])
 
   //call back to get test type
   const changeTestAnalysisModuleCallback = (newchoice) =>{

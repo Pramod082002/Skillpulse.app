@@ -1,9 +1,32 @@
 import React, { useEffect,useState } from 'react'
 import { BarChart } from '@mui/x-charts/BarChart';
 import { Card, CardContent, Typography } from '@mui/material';
-import { TestTotalMarks } from '../Data/TestHistory';
-import { TestModulesHistory } from '../Data/TestHistory';
+import { TestTotalMarks, totalMarks } from '../Data/TestHistory';
 import EmptyGraphBackground from './EmptyGraphBackground';
+
+async function updateTestHistory(token) {
+  console.log('sending', token);
+  try {
+    const response = await fetch('http://localhost:8000/api/dbaccess/get-test-mark/', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Token ' + token,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error:', error);
+    throw error;
+  }
+}
+
 
 function GraphModule({testAnalysisModule}) {
 
@@ -20,6 +43,23 @@ function GraphModule({testAnalysisModule}) {
   // connect -1 in graph module to testHistory
   // hardcoded marks
 
+  const [totalMarks, changeTotalMarks] = useState(TestTotalMarks);
+
+  
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const data = await updateTestHistory(sessionStorage.getItem('myToken'));
+        console.log('expected data', data);
+        changeTotalMarks(data);
+      } catch (error) {
+        // Handle error if needed
+      }
+    }
+  
+    fetchData();
+  }, [totalMarks]);
+  
 
   useEffect(() => {
 
@@ -27,12 +67,12 @@ function GraphModule({testAnalysisModule}) {
   
     // For entry test 
     var tempEntrySubjects = [], tempEntryMarks = [];
-    Object.keys(TestTotalMarks?.entryTest?.m1 || {})
-      .concat(Object.keys(TestTotalMarks?.entryTest?.m2 || {}))
+    Object.keys(totalMarks?.entryTest?.m1 || {})
+      .concat(Object.keys(totalMarks?.entryTest?.m2 || {}))
       .forEach((key) => {
-        if (TestTotalMarks.entryTest.m1[key]?.totalMarks > -1 || TestTotalMarks.entryTest.m2[key]?.totalMarks > -1) {
+        if (totalMarks.entryTest.m1[key]?.totalMarks > -1 || totalMarks.entryTest.m2[key]?.totalMarks > -1) {
           tempEntrySubjects.push(key.toUpperCase());
-          tempEntryMarks.push(TestTotalMarks.entryTest.m1[key]?.totalMarks || TestTotalMarks.entryTest.m2[key]?.totalMarks);
+          tempEntryMarks.push(totalMarks.entryTest.m1[key]?.totalMarks || totalMarks.entryTest.m2[key]?.totalMarks);
         }
       });
   
@@ -41,12 +81,12 @@ function GraphModule({testAnalysisModule}) {
   
     // For exit test
     var tempExitSubjects = [], tempExitMarks = [];
-    Object.keys(TestTotalMarks?.exitTest?.m1 || {})
-      .concat(Object.keys(TestTotalMarks?.exitTest?.m2 || {}))
+    Object.keys(totalMarks?.exitTest?.m1 || {})
+      .concat(Object.keys(totalMarks?.exitTest?.m2 || {}))
       .forEach((key) => {
-        if (TestTotalMarks.exitTest.m1[key]?.totalMarks > -1 || TestTotalMarks.exitTest.m2[key]?.totalMarks > -1) {
+        if (totalMarks.exitTest.m1[key]?.totalMarks > -1 || totalMarks.exitTest.m2[key]?.totalMarks > -1) {
           tempExitSubjects.push(key.toUpperCase());
-          tempExitMarks.push(TestTotalMarks.exitTest.m1[key]?.totalMarks || TestTotalMarks.exitTest.m2[key]?.totalMarks);
+          tempExitMarks.push(totalMarks.exitTest.m1[key]?.totalMarks || totalMarks.exitTest.m2[key]?.totalMarks);
         }
       });
   
@@ -56,13 +96,13 @@ function GraphModule({testAnalysisModule}) {
     console.log(subjectsEntryTest)
     console.log(subjectsExitTest)
 
-  }, []);
+  }, [totalMarks]);
   
 
   return (
     <Card sx={{margin:'10px'}}>
     { 
-      (testAnalysisModule==='entry test') ? (
+      (testAnalysisModule==='entryTest') ? (
         <CardContent>
           <div>
             { 

@@ -18,7 +18,7 @@ const defaultTheme = createTheme();
 
 export default function Login() {
 
-    const [token,setToken]=useState("");
+  const [token,setToken]=useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -31,7 +31,7 @@ export default function Login() {
             myHeaders.append("Content-Type", "application/json");
             
             var raw = JSON.stringify({
-              "email": formData.get('email'),
+              "username": formData.get('email'),
               "password": formData.get('password')
             });
             
@@ -41,20 +41,26 @@ export default function Login() {
               body: raw,
             };
             
-            fetch("http://localhost:8000/", requestOptions)   //enter login post end point.
+            fetch("http://localhost:8000/api/token-auth/", requestOptions)   //enter login post end point.
               .then(response=>response.json())
               .then(result => {
+                console.log(result)
                 setToken(result.token);
+                sessionStorage.setItem("myToken",token);
                 console.log("Token:"+token);
                })
               .catch(error => console.log('error', error));
+
+            //navigate to dashboard on correct response
+
+            //else navigate to dashboard itself
   };
 
 
   return (
     <ThemeProvider theme={defaultTheme}>
       <Grid container component="main" sx={{ height: '100vh',
-            backgroundImage: 'url(https://images.unsplash.com/photo-1432821596592-e2c18b78144f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80)',
+            //backgroundImage: 'url(https://images.unsplash.com/photo-1432821596592-e2c18b78144f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80)',
             backgroundRepeat: 'no-repeat',
             backgroundColor: (t) =>
               t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],

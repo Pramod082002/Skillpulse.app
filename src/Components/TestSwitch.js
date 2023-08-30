@@ -5,7 +5,7 @@ const label = { inputProps: { 'aria-label': 'Switch demo' } };
 
 function TestSwitch({changeTestAnalysisModuleCallback}) {
 
-    const [currentTest, changeTestAnalysis] = React.useState({test:'entry test',onoff:true}); // Default state is 'on'
+    const [currentTest, changeTestAnalysis] = React.useState({test:'entryTest',onoff:true}); // Default state is 'on'
 
     useEffect(()=>{
         console.log(currentTest)
@@ -13,8 +13,8 @@ function TestSwitch({changeTestAnalysisModuleCallback}) {
     },[currentTest])
 
     const handleChange = () => {
-        if(currentTest.onoff) changeTestAnalysis({test:'exit test',onoff:false});
-        else changeTestAnalysis({test:'entry test',onoff:true});
+        if(currentTest.onoff) changeTestAnalysis({test:'exitTest',onoff:false});
+        else changeTestAnalysis({test:'entryTest',onoff:true});
     };
 
     return (

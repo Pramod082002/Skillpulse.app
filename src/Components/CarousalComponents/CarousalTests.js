@@ -46,7 +46,7 @@ function CarousalTests({userChoiceSubject,changeChoiceTestCallback,userChoiceMod
           <div className='Carousal-Tests-Holder'>
             {!testAttendance.entryTest ? 
               (
-                <div onClick={()=>{changeChoiceTestCallback("entry test")}}>
+                <div onClick={()=>{changeChoiceTestCallback("entryTest")}}>
                   <ElegantCard  cardName={`ENTRY TEST`} />
                 </div>
               ):
@@ -58,7 +58,7 @@ function CarousalTests({userChoiceSubject,changeChoiceTestCallback,userChoiceMod
             }
             {!testAttendance.exitTest ? 
               (
-                <div onClick={()=>{changeChoiceTestCallback("exit test")}}>
+                <div onClick={()=>{changeChoiceTestCallback("exitTest")}}>
                   <ElegantCard  cardName={`EXIT TEST`} />
                 </div>
               ):
