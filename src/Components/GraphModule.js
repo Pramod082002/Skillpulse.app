@@ -4,31 +4,8 @@ import { Card, CardContent, Typography } from '@mui/material';
 import { TestTotalMarks, totalMarks } from '../Data/TestHistory';
 import EmptyGraphBackground from './EmptyGraphBackground';
 
-async function updateTestHistory(token) {
-  console.log('sending', token);
-  try {
-    const response = await fetch('http://localhost:8000/api/dbaccess/get-test-mark/', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Token ' + token,
-      },
-    });
 
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error('Error:', error);
-    throw error;
-  }
-}
-
-
-function GraphModule({testAnalysisModule}) {
+function GraphModule({testAnalysisModule,totalMarks}) {
 
   //entry test
   const [subjectsEntryTest,changeEntryTestSubjects] = useState([]);
@@ -43,23 +20,6 @@ function GraphModule({testAnalysisModule}) {
   // connect -1 in graph module to testHistory
   // hardcoded marks
 
-  const [totalMarks, changeTotalMarks] = useState(TestTotalMarks);
-
-  
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const data = await updateTestHistory(sessionStorage.getItem('myToken'));
-        console.log('expected data', data);
-        changeTotalMarks(data);
-      } catch (error) {
-        // Handle error if needed
-      }
-    }
-  
-    fetchData();
-  }, [totalMarks]);
-  
 
   useEffect(() => {
 

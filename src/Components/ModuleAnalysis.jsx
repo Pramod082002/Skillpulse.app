@@ -8,13 +8,9 @@ import {
   Typography 
 } from "@mui/material";
 import { useState } from "react";
-import { TestModulesHistory } from "../Data/TestHistory";
-import EmptyModuleAnalysis from '../Components/EmptyModuleAnalysis'
-import { TestTotalMarks } from "../Data/TestHistory";
-import { cnEntryTest } from "../Data/QNA Entry Tests/ALL_ENTRY_TEST";
 import SingleSubjectCard from "./SingleSubjectCard";
 
-const ModuleAnalysis = ({testAnalysisModule}) => {
+const ModuleAnalysis = ({testAnalysisModule,totalMarks}) => {
   const [moduleSelection, setModuleSelection] = useState("");
 
   return (
@@ -36,22 +32,22 @@ const ModuleAnalysis = ({testAnalysisModule}) => {
       <div style={{minWidth:'200px', display:'flex', flexDirection:'column', gap: '20px' }}>
         {testAnalysisModule === 'entry test' ? (
           moduleSelection === 'm1' ? (
-            Object.keys(TestTotalMarks.entryTest.m1).map((element) => (
-              <SingleSubjectCard key={element} singleSubject={TestTotalMarks.entryTest.m1[element]} subjectName={element} />
+            Object.keys(totalMarks.entryTest.m1).map((element) => (
+              <SingleSubjectCard key={element} singleSubject={totalMarks.entryTest.m1[element]} subjectName={element} />
             ))
           ) : (
-            Object.keys(TestTotalMarks.entryTest.m2).map((element) => (
-              <SingleSubjectCard key={element} singleSubject={TestTotalMarks.entryTest.m2[element]} subjectName={element} />
+            Object.keys(totalMarks.entryTest.m2).map((element) => (
+              <SingleSubjectCard key={element} singleSubject={totalMarks.entryTest.m2[element]} subjectName={element} />
             ))
           )
         ) : (
           moduleSelection === 'm1' ? (
-            Object.keys(TestTotalMarks.exitTest.m1).map((element) => (
-              <SingleSubjectCard key={element} singleSubject={TestTotalMarks.exitTest.m1[element]} subjectName={element} />
+            Object.keys(totalMarks.exitTest.m1).map((element) => (
+              <SingleSubjectCard key={element} singleSubject={totalMarks.exitTest.m1[element]} subjectName={element} />
             ))
           ) : (
-            Object.keys(TestTotalMarks.exitTest.m2).map((element) => (
-              <SingleSubjectCard key={element} singleSubject={TestTotalMarks.exitTest.m2[element]} subjectName={element} />
+            Object.keys(totalMarks.exitTest.m2).map((element) => (
+              <SingleSubjectCard key={element} singleSubject={totalMarks.exitTest.m2[element]} subjectName={element} />
             ))
           )
         )}

@@ -42,34 +42,29 @@ const theme = createTheme({
   },
 });
 
-function updateTestHistory(token){
-  console.log('sending',token)
-  fetch('http://localhost:8000/api/dbaccess/get-test-mark/', {
-    method: 'GET',  // HTTP method
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization' : ('Token '+token)
-    },
-  })
-  .then(response => {
+async function updateTestHistory(token) {
+  console.log('sending', token);
+  try {
+    const response = await fetch('http://localhost:8000/api/dbaccess/get-test-mark/', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Token ' + token,
+      },
+    });
+
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
-    return response.json(); // Parse response body as JSON
-  })
-  .then(data => {
-    // Handle the parsed data
-    //console.log('Getting Data:', data);
-    //console.log('total marks',TestTotalMarks)
-    console.log('data',data)
 
-    TestTotalMarks = data
-  })
-  .catch(error => {
+    const data = await response.json();
+    return data;
+  } catch (error) {
     console.error('Error:', error);
-  });
-  
+    throw error;
+  }
 }
+
 
 function Dashboard() {
 
@@ -81,12 +76,23 @@ function Dashboard() {
   
   const [testAnalysisModule,changeTestAnalysisModule] = useState("entryTest");
 
-  //mounting call to mongo db
-  useEffect(()=>{
+  const [totalMarks, changeTotalMarks] = useState(TestTotalMarks);
 
-    //updateTestHistory(sessionStorage.getItem('myToken'))
+  
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const data = await updateTestHistory(sessionStorage.getItem('myToken'));
+        console.log('expected data', data);
+        changeTotalMarks(data);
+      } catch (error) {
+        // Handle error if needed
+      }
+    }
+  
+    fetchData();
+  }, []);
 
-  },[])
 
   //call back to get test type
   const changeTestAnalysisModuleCallback = (newchoice) =>{
@@ -127,10 +133,10 @@ function Dashboard() {
     <ThemeProvider theme={theme}>
       <div className='Dashboard-Container'>
 
-        <div style={{ display: 'flex', alignItems: 'center',  justifyContent:'center'}}>
-          <h1 className="font-Pacifico">Dashboard</h1>  
-          <TestSwitch style={{alignSelf: 'flex-end'}} changeTestAnalysisModuleCallback={changeTestAnalysisModuleCallback}/>
-        </div>  
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <h1 className="font-Pacifico" style={{ marginLeft: '80px', textAlign: 'center', flex: 1 }}>Dashboard</h1>
+          <TestSwitch changeTestAnalysisModuleCallback={changeTestAnalysisModuleCallback} />
+        </div>
 
         <div sx={{position:'relative'}}>
           <Divider variant='middle'>
@@ -138,8 +144,9 @@ function Dashboard() {
           </Divider>
         </div>
 
+        {/* 1. graph representation */}
         <div className='Score-Graph-Representation'>
-          <GraphModule testAnalysisModule={testAnalysisModule} />
+          <GraphModule testAnalysisModule={testAnalysisModule} totalMarks={totalMarks} />
         </div>
 
         <div sx={{position:'relative', borderBottomWidth: 0}}>
@@ -150,7 +157,8 @@ function Dashboard() {
 
         {/* Predefined score rep json from DATA, also the comments */}
         
-        <ModuleAnalysis testAnalysisModule={testAnalysisModule} />
+        {/* 2. Module Analysis */}
+        <ModuleAnalysis testAnalysisModule={testAnalysisModule} totalMarks={totalMarks} />
         
         <div sx={{position:'relative', borderBottomWidth: 0}}>
           <Divider variant='middle'>

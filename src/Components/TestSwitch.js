@@ -5,7 +5,7 @@ const label = { inputProps: { 'aria-label': 'Switch demo' } };
 
 function TestSwitch({changeTestAnalysisModuleCallback}) {
 
-    const [currentTest, changeTestAnalysis] = React.useState({test:'entryTest',onoff:true}); // Default state is 'on'
+    const [currentTest, changeTestAnalysis] = React.useState({test:'entryTest',onoff:false}); // Default state is 'on'
 
     useEffect(()=>{
         console.log(currentTest)
@@ -13,14 +13,24 @@ function TestSwitch({changeTestAnalysisModuleCallback}) {
     },[currentTest])
 
     const handleChange = () => {
-        if(currentTest.onoff) changeTestAnalysis({test:'exitTest',onoff:false});
-        else changeTestAnalysis({test:'entryTest',onoff:true});
+        if(currentTest.onoff) changeTestAnalysis({test:'entryTest',onoff:false});
+        else changeTestAnalysis({test:'exitTest',onoff:true});
     };
 
     return (
-        <div>
+        <div style={{display:'flex', flexDirection:'column', width:'100px', justifyContent:'center', alignItems:'center'}}>
             <Switch {...label} checked={currentTest.onoff} onChange={handleChange} />
-            <p>{currentTest.test.toUpperCase()}</p>
+            {
+                currentTest.test === 'entryTest' ? (
+                    <p  style={{ fontFamily:'Tahoma and Roboto', fontWeight:'bold', textAlign: 'center', lineHeight: '1.5' }}>
+                    ENTRY<br />TEST
+                    </p>
+                ) : (
+                    <p style={{ fontFamily:'Tahoma and Roboto', fontWeight:'bold', textAlign: 'center', lineHeight: '1.5' }}>
+                    EXIT<br />TEST
+                    </p>
+                )
+            }
         </div>
     )
 }

@@ -10,6 +10,7 @@ import {
   Rating
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { subjectIconLinks } from "../Data/ModulesData";
 
 export default function SingleSubjectCard({singleSubject,subjectName}) {
   const [expanded, setExpanded] = useState(false);
@@ -43,11 +44,14 @@ export default function SingleSubjectCard({singleSubject,subjectName}) {
               <div
                 style={{
                   display: "flex",
-                  justifyContent: "center",
+                  justifyContent: "space-around",
                   alignItems: "center"
                 }}
               >
-                {subjectName.toUpperCase()}
+                <h3>{subjectName.toUpperCase()}</h3>
+                <div>
+                  <img style={{ width: '30px', height: '30px' }} src={subjectIconLinks[subjectName]} alt="Icon" />
+                </div>
               </div>
             }
             action={
@@ -80,7 +84,8 @@ export default function SingleSubjectCard({singleSubject,subjectName}) {
                       key={index} 
                       style={{
                         display: "flex",
-                        justifyContent: "space-around"
+                        justifyContent: "space-between",
+                        width: "500px"
                       }}
                     >
                       <Typography paragraph>{eachTopic.toUpperCase()}</Typography>
