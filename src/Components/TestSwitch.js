@@ -1,38 +1,41 @@
-import React, { useEffect } from 'react'
-import Switch from '@mui/material/Switch';
+import React, { useState, useEffect } from 'react';
+import { 
+    FormControl,
+    InputLabel,
+    Select,
+    MenuItem
+} from '@mui/material';
+import '../App.css'
 
-const label = { inputProps: { 'aria-label': 'Switch demo' } };
+function TestSwitch({ changeTestTypeGraphCallback }) {
+  const [currentTest, changeTestAnalysis] = useState(''); // Default state is 'entryTest'
 
-function TestSwitch({changeTestAnalysisModuleCallback}) {
+  useEffect(() => {
+    console.log(currentTest);
+    changeTestTypeGraphCallback(currentTest); // Set onoff to false as in the original code
+  }, [currentTest]);
 
-    const [currentTest, changeTestAnalysis] = React.useState({test:'entryTest',onoff:false}); // Default state is 'on'
+  const handleChange = (event) => {
+    const selectedTest = event.target.value;
+    changeTestAnalysis(selectedTest);
+  };
 
-    useEffect(()=>{
-        console.log(currentTest)
-        changeTestAnalysisModuleCallback(currentTest)
-    },[currentTest])
-
-    const handleChange = () => {
-        if(currentTest.onoff) changeTestAnalysis({test:'entryTest',onoff:false});
-        else changeTestAnalysis({test:'exitTest',onoff:true});
-    };
-
-    return (
-        <div style={{display:'flex', flexDirection:'column', width:'100px', justifyContent:'center', alignItems:'center'}}>
-            <Switch {...label} checked={currentTest.onoff} onChange={handleChange} />
-            {
-                currentTest.test === 'entryTest' ? (
-                    <p  style={{ fontFamily:'Tahoma and Roboto', fontWeight:'bold', textAlign: 'center', lineHeight: '1.5' }}>
-                    ENTRY<br />TEST
-                    </p>
-                ) : (
-                    <p style={{ fontFamily:'Tahoma and Roboto', fontWeight:'bold', textAlign: 'center', lineHeight: '1.5' }}>
-                    EXIT<br />TEST
-                    </p>
-                )
-            }
-        </div>
-    )
+  return (
+    <div>
+        <FormControl sx={{marginBottom: "20px", width:'150px'}}>
+            <InputLabel id="navbarFont">Test Type</InputLabel>
+            <Select 
+                id="navbarFont"
+                label=".Test.Type"
+                value={currentTest} 
+                onChange={handleChange}
+            >
+                <MenuItem id="navbarFont" value="entryTest">Entry Test</MenuItem>
+                <MenuItem id="navbarFont" value="exitTest">Exit Test</MenuItem>
+            </Select>
+        </FormControl>
+    </div>
+  );
 }
 
-export default TestSwitch
+export default TestSwitch;

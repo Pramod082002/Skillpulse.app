@@ -28,6 +28,7 @@ import { TestTotalMarks } from '../Data/TestHistory';
 
 import { useNavigate } from 'react-router-dom';
 import ModuleAnalysis from './ModuleAnalysis';
+import ModuleSwitch from './Graphmodules/ModuleSwitch';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -74,7 +75,8 @@ function Dashboard() {
   const [takeTest,changeTakeTest] = useState([]);
 
   
-  const [testAnalysisModule,changeTestAnalysisModule] = useState("entryTest");
+  const [testTypeGraph,changeTestTypeGraph] = useState("entryTest");
+  const [moduleTypeGraph,changeModuleTypeGraph] = useState("m1");
 
   const [totalMarks, changeTotalMarks] = useState(TestTotalMarks);
 
@@ -94,11 +96,18 @@ function Dashboard() {
   }, []);
 
 
-  //call back to get test type
-  const changeTestAnalysisModuleCallback = (newchoice) =>{
+  //### call backs for graphs
+  const changeTestTypeGraphCallback = (newchoice) =>{
     console.log('change here')
-    changeTestAnalysisModule(newchoice.test);
+    changeTestTypeGraph(newchoice);
   }
+
+  const changeModuleTypeGraphCallback = (newchoice) =>{
+    console.log('change here')
+    changeModuleTypeGraph(newchoice);
+  }
+
+  //###graphs call back done here
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -133,37 +142,36 @@ function Dashboard() {
     <ThemeProvider theme={theme}>
       <div className='Dashboard-Container'>
 
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <h1 className="font-Pacifico" style={{ marginLeft: '80px', textAlign: 'center', flex: 1 }}>Dashboard</h1>
-          <TestSwitch changeTestAnalysisModuleCallback={changeTestAnalysisModuleCallback} />
+        <div>
+          <h1 id="headingFont" style={{ textAlign: 'center' }}>Dashboard</h1>
         </div>
 
         <div sx={{position:'relative'}}>
-          <Divider variant='middle'>
-            <Chip label="Graph" />
-          </Divider>
+          <Divider variant='middle'></Divider>
         </div>
 
         {/* 1. graph representation */}
-        <div className='Score-Graph-Representation'>
-          <GraphModule testAnalysisModule={testAnalysisModule} totalMarks={totalMarks} />
+        <div style={{display:'flex',flexDirection:'column'}} className='Score-Graph-Representation'>
+
+          <div style={{display:'flex',margin:'10px'}}>
+            <TestSwitch changeTestTypeGraphCallback={changeTestTypeGraphCallback} />
+            <ModuleSwitch changeModuleTypeGraphCallback={changeModuleTypeGraphCallback}/>
+          </div>
+          
+          <GraphModule moduleTypeGraph={moduleTypeGraph} testTypeGraph={testTypeGraph} totalMarks={totalMarks} />
         </div>
 
         <div sx={{position:'relative', borderBottomWidth: 0}}>
-          <Divider variant='middle'>
-            <Chip label="Analytics" />
-          </Divider>
+          <Divider variant='middle'></Divider>
         </div>
 
         {/* Predefined score rep json from DATA, also the comments */}
         
         {/* 2. Module Analysis */}
-        <ModuleAnalysis testAnalysisModule={testAnalysisModule} totalMarks={totalMarks} />
+        {/* <ModuleAnalysis testAnalysisModule={testAnalysisModule} totalMarks={totalMarks} /> */}
         
         <div sx={{position:'relative', borderBottomWidth: 0}}>
-          <Divider variant='middle'>
-            <Chip label="Submit" />
-          </Divider>
+          <Divider variant='middle'></Divider>
         </div>
         
         {/* This should open a fullscreen modal */}
