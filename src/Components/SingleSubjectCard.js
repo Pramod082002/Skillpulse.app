@@ -13,7 +13,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { subjectIconLinks } from "../Data/ModulesData";
 
 export default function SingleSubjectCard({singleSubject,subjectName}) {
-  const [expanded, setExpanded] = useState(false);
+  const [expanded, setExpanded] = useState(true);
   const [subtopicsName,changeSubtopicName] = useState([]);
 
   const handleExpandClick = () => {
@@ -32,13 +32,13 @@ export default function SingleSubjectCard({singleSubject,subjectName}) {
 
     console.log(tempSubtopicsName)
     changeSubtopicName(tempSubtopicsName);
-  },[])
+  },[singleSubject,subjectName])
 
   return (
     <div>
     {
       subtopicsName.length > 0 && 
-        <Card>
+        <Card style={{ margin:'20px' }}>
           <CardHeader
             title={
               <div

@@ -80,21 +80,21 @@ const TestQNA = () => {
 
   const navigate = useNavigate();
 
-  function updateTheGraphData(data){
-    var subject = Object.keys(data.scores)[0];
+  // function updateTheGraphData(data){
+  //   var subject = Object.keys(data.scores)[0];
 
-    var sumFinalScores = 0;
-    Object.values(data.scores.final_score).forEach((val)=>{
-      sumFinalScores += val
-    })
+  //   var sumFinalScores = 0;
+  //   Object.values(data.scores.final_score).forEach((val)=>{
+  //     sumFinalScores += val
+  //   })
 
-    var retFinalSum = parseInt((((sumFinalScores/5)/100)*10))
+  //   var retFinalSum = parseInt((((sumFinalScores/5)/100)*10))
   
-    // assuming m2 only uses backend
-    TestTotalMarks[testType].m2[subject].totalMarks = retFinalSum;
-    console.log('finalllllllll sum',retFinalSum)
-    handleNavigate();
-  }
+  //   // assuming m2 only uses backend
+  //   TestTotalMarks[testType].m2[subject].totalMarks = retFinalSum;
+  //   console.log('finalllllllll sum',retFinalSum)
+  //   handleNavigate();
+  // }
   
   function hitServer(reqObj){
   
@@ -126,8 +126,9 @@ const TestQNA = () => {
       const data = await fetchData();
       if (data) {
         console.log('Fetched data Yo :', data);
-        updateTheGraphData(data);
-        //navigate('/dashboard');
+        //updateTheGraphData(data); // Calc done in front end
+        TestTotalMarks = data
+        handleNavigate();
       }
     }
     
@@ -161,6 +162,7 @@ const TestQNA = () => {
 
     //major part, hitting the backend endpoint
     var response = hitServer(reqObj);
+
     console.log('YAYYYY GOT RESPONSE',response)
   };
 

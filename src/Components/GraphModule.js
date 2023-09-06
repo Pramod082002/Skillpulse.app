@@ -37,7 +37,7 @@ function GraphModule({ moduleTypeGraph, testTypeGraph, totalMarks }) {
   return (
     <Card>
       <CardContent>
-        <div sx={{ margin: '10px', minHeight:'300px' }}>
+        <div sx={{ minHeight:'300px' }}>
           {subjects.length > 0 && marks.length > 0 ? (
             <BarChart
               xAxis={[
@@ -60,8 +60,8 @@ function GraphModule({ moduleTypeGraph, testTypeGraph, totalMarks }) {
                   color: testTypeGraph === 'entryTest' ? '#3498db' : '#2ecc71', // Set color to red for 'm2'
                 },
               ]}
-              width={400}
-              height={400}
+              width={450}
+              height={450}
             />
           ) : (
             <EmptyGraphBackground />

@@ -44,11 +44,30 @@ export default function TextCarousel({getCombinedChoices}) {
 
       <Paper elevation={3} style={{ padding: '20px' }}>
 
-        <Typography variant="p" style={{ color: '#6b6b6b' }}>
-          ROUTE :
-          {userChoiceModule && ` ${userChoiceModule.toUpperCase()}`}
-          {userChoiceSubject && ` / ${userChoiceSubject.toUpperCase()}`}
-          {userChoiceTest && ` / ${userChoiceTest.toUpperCase()}`}
+        <Typography variant="p" style={{ color: 'grey' }}>
+        <Typography variant="p" style={{ color: 'black'}}>ROUTE</Typography> :
+          {userChoiceModule && <Typography variant="p" style={{ color: 'black' }}> {userChoiceModule.toUpperCase()}</Typography>}
+          {
+            userChoiceSubject && 
+            <Typography variant="p"> / 
+              <Typography variant="p" style={{ color: 'black'}}> {userChoiceSubject.toUpperCase()}</Typography>
+            </Typography>
+          }
+          {
+            userChoiceTest ?  
+              userChoiceTest==='entryTest' ? 
+              
+                <Typography variant="p"> / 
+                  <Typography variant="p" style={{ color: 'black'}}> ENTRY TEST</Typography>
+                </Typography>
+                :
+                <Typography variant="p"> / 
+                  <Typography variant="p" style={{ color: 'black'}}> EXIT TEST</Typography>
+                </Typography>
+
+              :
+              <></>
+          }
         </Typography>
 
         {/* change choice of test if module is selected */}

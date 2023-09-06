@@ -10,48 +10,38 @@ import {
 import { useEffect, useState } from "react";
 import SingleSubjectCard from "./SingleSubjectCard";
 
-const ModuleAnalysis = ({testAnalysisModule,totalMarks}) => {
-  const [moduleSelection, setModuleSelection] = useState("");
+const ModuleAnalysis = ({ testTypeSplitWise, moduleTypeSplitWise, totalMarks }) => {
+  const [subjectCards, setSubjectCards] = useState([]);
+
+  useEffect(() => {
+    let cardsToRender = [];
+    if (testTypeSplitWise === 'entryTest') {
+      if (moduleTypeSplitWise === 'm1') {
+        cardsToRender = Object.keys(totalMarks.entryTest.m1).map((element) => (
+          <SingleSubjectCard key={element} singleSubject={totalMarks.entryTest.m1[element]} subjectName={element} />
+        ));
+      } else {
+        cardsToRender = Object.keys(totalMarks.entryTest.m2).map((element) => (
+          <SingleSubjectCard key={element} singleSubject={totalMarks.entryTest.m2[element]} subjectName={element} />
+        ));
+      }
+    } else {
+      if (moduleTypeSplitWise === 'm1') {
+        cardsToRender = Object.keys(totalMarks.exitTest.m1).map((element) => (
+          <SingleSubjectCard key={element} singleSubject={totalMarks.exitTest.m1[element]} subjectName={element} />
+        ));
+      } else {
+        cardsToRender = Object.keys(totalMarks.exitTest.m2).map((element) => (
+          <SingleSubjectCard key={element} singleSubject={totalMarks.exitTest.m2[element]} subjectName={element} />
+        ));
+      }
+    }
+    setSubjectCards(cardsToRender);
+  }, [testTypeSplitWise, moduleTypeSplitWise, totalMarks]);
 
   return (
-    <div style={{padding: "20px", display:'flex', flexDirection:"column", justifyContent:'center', alignItems:'center' }}>
-      <FormControl style={{ marginBottom: "20px", minWidth:"150px" }}>
-        <InputLabel id="navbarFont">Module</InputLabel>
-        <Select
-          id="navbarFont"
-          label="Module."
-          value={moduleSelection}
-          onChange={(e)=>setModuleSelection(e.target.value)}
-        >
-          <MenuItem id="navbarFont" value="m1">MODULE 1</MenuItem>
-          <MenuItem id="navbarFont" value="m2">MODULE 2</MenuItem>
-        </Select>
-      </FormControl>
-
-      <div style={{minWidth:'200px', display:'flex', flexDirection:'column' }}>
-        {testAnalysisModule === 'entryTest' ? (
-          moduleSelection === 'm1' ? (
-            Object.keys(totalMarks.entryTest.m1).map((element) => (
-              <SingleSubjectCard key={element} singleSubject={totalMarks.entryTest.m1[element]} subjectName={element} />
-            ))
-          ) : (
-            Object.keys(totalMarks.entryTest.m2).map((element) => (
-              <SingleSubjectCard key={element} singleSubject={totalMarks.entryTest.m2[element]} subjectName={element} />
-            ))
-          )
-        ) : (
-          moduleSelection === 'm1' ? (
-            Object.keys(totalMarks.exitTest.m1).map((element) => (
-              <SingleSubjectCard key={element} singleSubject={totalMarks.exitTest.m1[element]} subjectName={element} />
-            ))
-          ) : (
-            Object.keys(totalMarks.exitTest.m2).map((element) => (
-              <SingleSubjectCard key={element} singleSubject={totalMarks.exitTest.m2[element]} subjectName={element} />
-            ))
-          )
-        )}
-      </div>
-      
+    <div style={{ minWidth: '200px', minHeight: '100px', display: 'flex', flexDirection: 'column' }}>
+      {subjectCards}
     </div>
   );
 };

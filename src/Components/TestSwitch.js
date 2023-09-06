@@ -8,7 +8,7 @@ import {
 import '../App.css'
 
 function TestSwitch({ changeTestTypeGraphCallback }) {
-  const [currentTest, changeTestAnalysis] = useState(''); // Default state is 'entryTest'
+  const [currentTest, changeTestAnalysis] = useState('entryTest'); // Default state is 'entryTest'
 
   useEffect(() => {
     console.log(currentTest);

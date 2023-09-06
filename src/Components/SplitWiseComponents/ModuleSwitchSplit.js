@@ -1,4 +1,4 @@
-import React, {useState,useEffect} from 'react'
+import React,{useState, useEffect} from 'react'
 import { 
     FormControl,
     InputLabel,
@@ -7,17 +7,17 @@ import {
 } from '@mui/material';
 import '../../App.css'
 
-function ModuleSwitch({ changeModuleTypeGraphCallback }) {
+function ModuleSwitchSplit({ changeModuleTypeSplitWiseCallback }) {
 
-    const [moduleGraph, changeModuleGraph] = useState('m1');
+    const [moduleTypeSplitWise, changeModuleTypeSplitWise] = useState('m1');
 
     useEffect(() => {
-        changeModuleTypeGraphCallback(moduleGraph); // Set onoff to false as in the original code
-    }, [moduleGraph]);
+        changeModuleTypeSplitWiseCallback(moduleTypeSplitWise); // Set onoff to false as in the original code
+    }, [moduleTypeSplitWise]);
 
     const handleChange = (event) => {
         const selectedMoudle = event.target.value;
-        changeModuleGraph(selectedMoudle);
+        changeModuleTypeSplitWise(selectedMoudle);
     };
 
   return (
@@ -27,7 +27,7 @@ function ModuleSwitch({ changeModuleTypeGraphCallback }) {
                 <Select
                 id="navbarFont"
                 label="Module."
-                value={moduleGraph}
+                value={moduleTypeSplitWise}
                 onChange={handleChange}
                 >
                     <MenuItem id="navbarFont" value="m1">Module 1</MenuItem>
@@ -38,4 +38,4 @@ function ModuleSwitch({ changeModuleTypeGraphCallback }) {
   )
 }
 
-export default ModuleSwitch
+export default ModuleSwitchSplit
