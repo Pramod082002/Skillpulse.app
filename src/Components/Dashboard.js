@@ -32,6 +32,8 @@ import ModuleSwitch from './Graphmodules/ModuleSwitch';
 import ModuleSwitchSplit from './SplitWiseComponents/ModuleSwitchSplit';
 import TestSwitchSplit from './SplitWiseComponents/TestSwitchSplit';
 import Spinner from './Spinner';
+import MainDrawer from './MainDrawer';
+
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -161,7 +163,7 @@ function Dashboard() {
   }
 
   return (
-    <>
+    <div style={{marginTop:'50px'}}>
       {
         isLoading ? (
           <Spinner />
@@ -250,7 +252,7 @@ function Dashboard() {
           </ThemeProvider>
         )
       }
-    </>
+    </div>
   )
   
 }
