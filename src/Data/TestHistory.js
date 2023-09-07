@@ -4,21 +4,29 @@ var TestModulesHistory = {
             subjectName : "C/C++",
             entryTest : false,
             exitTest : false,
+            entryTestCompletion : "",
+            exitTestCompletion : "",
         },
         "java" : {
             subjectName : "JAVA",
             entryTest : false,
             exitTest : false,
+            entryTestCompletion : "",
+            exitTestCompletion : "",
         },
         "oops" : {
             subjectName : "OOPS",
             entryTest : false,
             exitTest : false,
+            entryTestCompletion : "",
+            exitTestCompletion : "",
         },
         "dsa" : {
             subjectName : "DSA",
             entryTest : false,
             exitTest : false,
+            entryTestCompletion : "",
+            exitTestCompletion : "",
         }
     },
     m2 : {
@@ -26,16 +34,22 @@ var TestModulesHistory = {
             subjectName : "DBMS",
             entryTest : false,
             exitTest : false,
+            entryTestCompletion : "",
+            exitTestCompletion : "",
         },
         "cn" : {
             subjectName : "CN",
             entryTest : true,
             exitTest : false,
+            entryTestCompletion : "",
+            exitTestCompletion : "",
         },
         "os" : {
             subjectName : "OS",
             entryTest : false,
             exitTest : false,
+            entryTestCompletion : "",
+            exitTestCompletion : "",
         },
     }
 }
@@ -168,21 +182,5 @@ var TestTotalMarks = {
         },
     },
 };
-
-
-//for graph
-// var TestTotalMarks = {
-//     m1 : {
-//         "c/c++" : 7, 
-//         "java" : -1,
-//         "oops" : 9,
-//         "dsa" : 9,
-//     },
-//     m2 : {
-//         "cn" : 0, 
-//         "dbms" : 9,
-//         "os" : -1,
-//     },
-// }
 
 export {TestModulesHistory,TestTotalMarks}

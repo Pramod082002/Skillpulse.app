@@ -12,7 +12,6 @@ var modules = {
     }
 }
 
-//const basePath = 'C:/Users/deexi/OneDrive/Desktop/Deexi/IN-PROGRESS/JMAN/jman-stud/public';
 
 const subjectIconLinks = {
     "c/c++": `/images/cc++.png`,

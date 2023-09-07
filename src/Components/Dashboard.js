@@ -32,8 +32,6 @@ import ModuleSwitch from './Graphmodules/ModuleSwitch';
 import ModuleSwitchSplit from './SplitWiseComponents/ModuleSwitchSplit';
 import TestSwitchSplit from './SplitWiseComponents/TestSwitchSplit';
 import Spinner from './Spinner';
-import MainDrawer from './MainDrawer';
-
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -96,9 +94,9 @@ function Dashboard() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const data = await updateTestHistory(sessionStorage.getItem('myToken'));
-        console.log('expected data', data);
-        changeTotalMarks(data);
+        const fetchedTestHistory = await updateTestHistory(sessionStorage.getItem('myToken'));
+        console.log('expected data', fetchedTestHistory);
+        changeTotalMarks(fetchedTestHistory);
       } catch (error) {
         // Handle error if needed
       }
