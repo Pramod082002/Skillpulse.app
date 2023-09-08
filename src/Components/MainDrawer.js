@@ -1,4 +1,3 @@
-import * as React from "react";
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
@@ -26,7 +25,11 @@ import { useNavigate } from "react-router";
 import TestsTaken from './MenuBarComponents/TestsTaken'
 import EmploymentDB from "./MenuBarComponents/EmploymentDB";
 import DetailedAnalytics from "./MenuBarComponents/DetailedAnalytics";
+import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 import { Routes, Route, Outlet, Link, useParams } from "react-router-dom";
+import Resources from "./MenuBarComponents/Resources";
+import ProfileCard from "./MenuBarComponents/ProfileCard";
+import React, {useState} from "react";
 
 
 const drawerWidth = 240;
@@ -80,8 +83,10 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 
 export default function PersistentDrawerLeft() {
   const theme = useTheme();
-  const [open, setOpen] = React.useState(true);
-  const [menuData,setMenuData] = React.useState('dashboard')
+  const [open, setOpen] = useState(true);
+  const [menuData,setMenuData] = useState('dashboard')
+
+  const [showProfile,setShowProfile] = useState(false)
 
   const navigate = useNavigate();
 
@@ -121,11 +126,19 @@ export default function PersistentDrawerLeft() {
     // Handle the click on the AccountCircleIcon here
     // You can display a popup card with the user's name and a logout button
     // For simplicity, I'll just show an alert for now
-    alert('User Name\nLogout');
+    if(showProfile) setShowProfile(false)
+    else setShowProfile(true)
   };
+
+  const handleResourcesClick = () =>{
+    navigate('/dashboard/resources');
+    setMenuData('resources')
+  }
+
 
   return (
     <Box sx={{ display: "flex" }}>
+      <ProfileCard showProfile={showProfile} />
       <AppBar position="fixed" open={open}>
         <Toolbar>
           <IconButton
@@ -202,6 +215,16 @@ export default function PersistentDrawerLeft() {
               <ListItemText primary="Detailed Analytics" />
             </ListItemButton>
           </ListItem>
+
+          <ListItem key="Resources" disablePadding>
+            <ListItemButton onClick={handleResourcesClick}>
+              <ListItemIcon>
+                <LibraryBooksIcon />
+              </ListItemIcon>
+              <ListItemText primary="Resources" />
+            </ListItemButton>
+          </ListItem>
+
         </List>
       </Drawer>
       <Main open={open}>
@@ -209,6 +232,7 @@ export default function PersistentDrawerLeft() {
         {menuData==='tests-taken' && <TestsTaken />}
         {menuData==='employment-db' && <EmploymentDB />}
         {menuData==='detailed-analytics' && <DetailedAnalytics />}
+        {menuData==='resources' && <Resources />}
 
         <Routes>
           <Route
@@ -236,6 +260,12 @@ export default function PersistentDrawerLeft() {
             />
             <Route
               path="detailed-analytics"
+              element={
+                  <DetailedAnalytics />
+              }
+            />
+            <Route
+              path="resources"
               element={
                   <DetailedAnalytics />
               }
