@@ -22,10 +22,11 @@ import WorkIcon from "@mui/icons-material/Work";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import TimelineIcon from "@mui/icons-material/Timeline";
 import Dashboard from "./Dashboard";
-import { Route } from "react-router";
+import { useNavigate } from "react-router";
 import TestsTaken from './MenuBarComponents/TestsTaken'
 import EmploymentDB from "./MenuBarComponents/EmploymentDB";
 import DetailedAnalytics from "./MenuBarComponents/DetailedAnalytics";
+import { Routes, Route, Outlet, Link, useParams } from "react-router-dom";
 
 
 const drawerWidth = 240;
@@ -79,8 +80,10 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 
 export default function PersistentDrawerLeft() {
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(true);
   const [menuData,setMenuData] = React.useState('dashboard')
+
+  const navigate = useNavigate();
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -92,25 +95,25 @@ export default function PersistentDrawerLeft() {
 
   const handleDashboardClick = () => {
     // Use the navigate function to redirect to the Dashboard page
-    //navigate('/dashboard');
+    navigate('/dashboard/');
     setMenuData('dashboard')
   };
 
   const handleTestHistoryClick = () => {
     // Use the navigate function to redirect to the Test History page
-    //navigate('/test-history');
+    navigate('/dashboard/test-taken');
     setMenuData('tests-taken')
   };
 
   const handleEmploymentDBClick = () => {
     // Use the navigate function to redirect to the Employment DB page
-    //navigate('/employment-db');
+    navigate('/dashboard/employment-db');
     setMenuData('employment-db')
   };
 
   const handleDetailedAnalyticsClick = () => {
     // Use the navigate function to redirect to the Detailed Analytics page
-    //navigate('/detailed-analytics');
+    navigate('/dashboard/detailed-analytics');
     setMenuData('detailed-analytics')
   };
 
@@ -206,6 +209,42 @@ export default function PersistentDrawerLeft() {
         {menuData==='tests-taken' && <TestsTaken />}
         {menuData==='employment-db' && <EmploymentDB />}
         {menuData==='detailed-analytics' && <DetailedAnalytics />}
+
+        <Routes>
+          <Route
+            path="/dashboard"
+            element={<Outlet />}
+          >
+            {/* Render the default component here */}
+            <Route
+              index
+              element={
+                  <Dashboard />
+              }
+            />
+            <Route
+              path="tests-taken"
+              element={
+                  <TestsTaken />
+              }
+            />
+            <Route
+              path="employment-db"
+              element={
+                  <EmploymentDB />
+              }
+            />
+            <Route
+              path="detailed-analytics"
+              element={
+                  <DetailedAnalytics />
+              }
+            />
+          </Route>
+        </Routes>
+        
+
+
       </Main>
     </Box>
   );

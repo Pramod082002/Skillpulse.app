@@ -65,8 +65,8 @@ function TestsTaken() {
       {
         !isLoading && !fetchError ? (
           <div>
-                <h1 id="headingFont" style={{ textAlign: 'center', margin:'10px' }}>Test History</h1>
-                <Divider></Divider>
+              <h1 id="headingFont" style={{ textAlign: 'center', margin:'10px' }}>Test History</h1>
+              <Divider></Divider>
           </div>
         ) : (
           <Loading />

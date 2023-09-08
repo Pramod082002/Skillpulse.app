@@ -92,9 +92,16 @@ function Dashboard() {
   const [totalMarks, changeTotalMarks] = useState(TestTotalMarks);
   
   useEffect(() => {
+
+    //check for token or redirect to the home page
+    let token = sessionStorage.getItem('myToken');
+    if(token==="" || token===undefined){
+      navigate('/home')
+    }
+
     async function fetchData() {
       try {
-        const fetchedTestHistory = await updateTestHistory(sessionStorage.getItem('myToken'));
+        const fetchedTestHistory = await updateTestHistory(token);
         console.log('expected data', fetchedTestHistory);
         changeTotalMarks(fetchedTestHistory);
       } catch (error) {
