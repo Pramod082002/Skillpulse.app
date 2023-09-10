@@ -12,6 +12,8 @@ import {
   Divider,
 } from "@mui/material";
 
+import { Card, Box, CardContent, Typography, CardMedia } from "@mui/material";
+
 const EmploymentDetails = ({ average }) => {
   // senoirs that are matched with current user.
   const [findMatch, setFindMatch] = useState([]);
@@ -113,6 +115,45 @@ const EmploymentDetails = ({ average }) => {
         )}
       </div>
       <Divider />
+
+      <Card sx={{ display: "flex", margin:'10px' }} >
+        <Box width="100%"> {/* Set the width to 100% */}
+          <CardContent sx={{ display: "flex", flexDirection:'row', justifyContent:'space-between', alignItems:'center' , width: '100%' }}> {/* Set the width to 100% */}
+            
+            <Typography sx={{width:'100px', textAlign:'center'}} component="div" variant="subtitle1">
+              Profile
+            </Typography>
+
+            <Typography sx={{width:'100px', textAlign:'center'}} component="div" variant="subtitle1">
+              Name
+            </Typography>
+
+            <Typography
+              variant="subtitle1"
+              component="div"
+              sx={{width:'100px', textAlign:'center'}}
+            >
+              Company
+            </Typography>
+
+            <Typography
+              variant="subtitle1"
+              component="div"
+              sx={{width:'100px', textAlign:'center'}}
+            >
+              CTC (LPA)
+            </Typography>
+
+            <Typography
+              variant="subtitle1"
+              component="div"
+              sx={{width:'100px', textAlign:'center'}}
+            >
+              EIS Score
+            </Typography>
+          </CardContent>
+        </Box>
+      </Card>
 
       {findMatch.length !== 0 && <EmployeeList seniors={findMatch} />}
     </>

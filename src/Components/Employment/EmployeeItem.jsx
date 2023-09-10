@@ -1,44 +1,46 @@
 import { Card, Box, CardContent, Typography, CardMedia } from "@mui/material";
 import IconButton from '@mui/material/IconButton';
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import Avatar from '@mui/material/Avatar';
 
 const EmployeeItem = ({ name, avg, company, ctc, idx }) => {
-  console.log(name, avg, company, ctc);
 
   return (
     <Card sx={{ display: "flex", margin:'10px' }} >
 
       <Box width="100%"> {/* Set the width to 100% */}
-        <CardContent sx={{ display: "flex", flexDirection:'row', justifyContent:'space-between', width: '100%' }}> {/* Set the width to 100% */}
+        <CardContent sx={{ display: "flex", flexDirection:'row', justifyContent:'space-between', alignItems:'center' , width: '100%' }}> {/* Set the width to 100% */}
           
-          <AccountCircleIcon />
-
-          <Typography component="div" variant="h5">
+          <div style={{width:'100px', display:'flex', justifyContent:'center'}}>
+            <Avatar  style={{ border: '2px solid #eeeeee' }} alt="candidate picture" src="/images/Deexith_Passport.jpg" />
+          </div>
+          
+          <Typography sx={{width:'100px', textAlign:'center'}} component="div" variant="subtitle1">
             {name}
           </Typography>
 
           <Typography
             variant="subtitle1"
-            color="text.secondary"
             component="div"
+            sx={{width:'100px', textAlign:'center'}}
           >
-            Company - {company}
+            {company}
           </Typography>
 
           <Typography
             variant="subtitle1"
-            color="text.secondary"
             component="div"
+            sx={{width:'100px', textAlign:'center'}}
           >
-            CTC - {ctc} LPA
+            {ctc}
           </Typography>
 
           <Typography
             variant="subtitle1"
-            color="text.secondary"
             component="div"
+            sx={{width:'100px', textAlign:'center'}}
           >
-            Average - {avg}
+            {avg}
           </Typography>
         </CardContent>
       </Box>
