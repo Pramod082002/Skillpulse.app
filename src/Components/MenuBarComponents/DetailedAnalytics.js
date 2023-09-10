@@ -1,10 +1,13 @@
 import React from 'react'
-import EmploymentDetails from '../Employment/EmploymentDetails'
+import { Divider } from '@mui/material'
 
 function DetailedAnalytics() {
   return (
     <div  style={{marginTop:'60px'}}>
-      <EmploymentDetails average={100} />
+      <div>
+          <h1 id="headingFont" style={{ textAlign: 'center', margin:'10px' }}>Detailed Analytics</h1>
+          <Divider></Divider>
+      </div>
     </div>
   )
 }
