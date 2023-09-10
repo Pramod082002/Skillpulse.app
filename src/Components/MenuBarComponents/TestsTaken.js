@@ -9,10 +9,68 @@ import {
 
 const apiEndpoint = "https://jsonplaceholder.typicode.com/todos/1";
 
+const tempObject = {
+  m1: {
+    "c/c++": {
+      subjectName: "C/C++",
+      entryTest: true,
+      exitTest: false,
+      entryTestCompletion: "2023-09-08", // Sample date
+      exitTestCompletion: "",
+    },
+    "java": {
+      subjectName: "JAVA",
+      entryTest: false,
+      exitTest: false,
+      entryTestCompletion: "",
+      exitTestCompletion: "",
+    },
+    "oops": {
+      subjectName: "OOPS",
+      entryTest: false,
+      exitTest: false,
+      entryTestCompletion: "",
+      exitTestCompletion: "",
+    },
+    "dsa": {
+      subjectName: "DSA",
+      entryTest: true,
+      exitTest: true,
+      entryTestCompletion: "2023-09-08", // Sample date
+      exitTestCompletion: "2023-09-15", // Sample date
+    },
+  },
+  m2: {
+    "dbms": {
+      subjectName: "DBMS",
+      entryTest: false,
+      exitTest: false,
+      entryTestCompletion: "",
+      exitTestCompletion: "",
+    },
+    "cn": {
+      subjectName: "CN",
+      entryTest: true,
+      exitTest: false,
+      entryTestCompletion: "2023-09-10", // Sample date
+      exitTestCompletion: "",
+    },
+    "os": {
+      subjectName: "OS",
+      entryTest: false,
+      exitTest: false,
+      entryTestCompletion: "",
+      exitTestCompletion: "",
+    },
+  },
+};
+
+// You can further update other subjects as needed.
 
 function TestsTaken() {
 
   const [testModulesHistory, changeTestModulesHistory] = useState(TestModulesHistory);
+
   const [isLoading, setIsLoading] = useState(true);
   const [fetchError,setFetchError] = useState(false);
 
@@ -36,8 +94,10 @@ function TestsTaken() {
         }
     
         const data = await response.json();
-        changeTestModulesHistory(data);
 
+        //updating the testModulesHistory
+        //changeTestModulesHistory(data);
+        changeTestModulesHistory(tempObject)
       }
       catch(error){
         console.log("Error fetching",error.message)
@@ -53,7 +113,8 @@ function TestsTaken() {
 
 
     //now calculate and display the test history cards
-    //get for module1 and module2 
+    //get for module1 and module2
+
 
   },[])
 

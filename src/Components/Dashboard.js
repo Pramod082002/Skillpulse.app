@@ -95,9 +95,9 @@ function Dashboard() {
 
     //check for token or redirect to the home page
     let token = sessionStorage.getItem('myToken');
-    if(token==="" || token===undefined){
-      navigate('/home')
-    }
+    if (token === null || token === "") {
+      navigate('/home');
+    }    
 
     async function fetchData() {
       try {

@@ -5,18 +5,22 @@ import {
 } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
 import '../../App.css';
-
-const handleLogout = () =>{
-
-    //remove the token
-
-    //navigate to home page
-
-}
+import { useNavigate } from 'react-router';
 
 function ProfileCard({ showProfile }) {
   const [isHovered, setIsHovered] = useState(false);
   const [username, setUsername] = useState('User');
+
+  const navigate = useNavigate();
+
+  const handleLogout = () =>{
+
+    //remove the token
+    sessionStorage.removeItem('myToken');
+
+    //navigate to home
+    navigate('/home')
+  }
 
   const logoutButtonStyles = {
     display: 'flex',

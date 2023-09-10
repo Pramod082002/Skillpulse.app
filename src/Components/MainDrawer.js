@@ -85,6 +85,7 @@ export default function PersistentDrawerLeft() {
   const theme = useTheme();
   const [open, setOpen] = useState(true);
   const [menuData,setMenuData] = useState('dashboard')
+  const [eisScore, setEisScore] = useState(0.0);
 
   const [showProfile,setShowProfile] = useState(false)
 

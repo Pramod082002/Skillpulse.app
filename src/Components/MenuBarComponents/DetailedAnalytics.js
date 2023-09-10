@@ -1,8 +1,11 @@
 import React from 'react'
+import EmploymentDetails from '../Employment/EmploymentDetails'
 
 function DetailedAnalytics() {
   return (
-    <div>DetailedAnalytics</div>
+    <div  style={{marginTop:'60px'}}>
+      <EmploymentDetails average={100} />
+    </div>
   )
 }
 
