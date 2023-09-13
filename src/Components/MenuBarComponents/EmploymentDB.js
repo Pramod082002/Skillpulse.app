@@ -9,7 +9,7 @@ function EmploymentDB() {
           <h1 id="headingFont" style={{ textAlign: 'center', margin:'10px' }}>Employment Database</h1>
           <Divider></Divider>
       </div>
-      <EmploymentDetails average={100} />
+      <EmploymentDetails eis={0} />
     </div>
   )
 }

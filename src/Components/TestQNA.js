@@ -8,6 +8,8 @@ import { useParams } from 'react-router-dom';
 import { TestTotalMarks } from '../Data/TestHistory'
 import { useNavigate } from 'react-router-dom';
 
+var globalFinalAns = cnEntryTest
+
 const getQuestionSet = (moduleName,subjectName,testType) =>{
 
 
@@ -18,12 +20,15 @@ const getQuestionSet = (moduleName,subjectName,testType) =>{
     switch(subjectName) {
       case 'cn':
         finalans = cnEntryTest; 
+        globalFinalAns = "cnEntryTest";
         break;
       case 'dbms':
         finalans = dbmsEntryTest; 
+        globalFinalAns = "dbmsEntryTest";
         break;
       case 'os':
         finalans = osEntryTest; 
+        globalFinalAns = "osEntryTest";
         break;
       default:
         finalans = [];
@@ -33,13 +38,16 @@ const getQuestionSet = (moduleName,subjectName,testType) =>{
   if(testType === 'exitTest'){
     switch(subjectName) {
       case 'cn':
-        finalans = cnExitTest; 
+        finalans = cnExitTest;
+        globalFinalAns = "cnExitTest"; 
         break;
       case 'dbms':
         finalans = dbmsExitTest; 
+        globalFinalAns = "dbmsExitTest";
         break;
       case 'os':
         finalans = osExitTest; 
+        globalFinalAns = "osExitTest";
         break;
       default:
         finalans = [];
@@ -50,27 +58,29 @@ const getQuestionSet = (moduleName,subjectName,testType) =>{
 }
 
 
-function makeReqObject(questions,subjectName){
+// function makeReqObject(questions,subjectName){
   
-  var userAnswerObject = {}, tempUserAnswerObject = {}
+//   var userAnswerObject = {}, tempUserAnswerObject = {}
 
-  var questionNumber = 1;
+//   var questionNumber = 1;
 
-  for (const entry of questions) {
-    const { user_answer } = entry;
-    tempUserAnswerObject[questionNumber++] = user_answer;
-  }
+//   for (const entry of questions) {
+//     const { user_answer } = entry;
+//     tempUserAnswerObject[questionNumber++] = user_answer;
+//   }
 
-  console.log(subjectName)
+//   //console.log(finalans)
 
-  userAnswerObject = {
-    ["UserAnswer"] : {
-      [subjectName] : tempUserAnswerObject
-    }
-  }
+//   userAnswerObject = {
+//     ["UserAnswer"] : {
+//       [subjectName] : tempUserAnswerObject
+//     }
+//   }
 
-  return userAnswerObject;
-}
+//   console.log('give me object ', userAnswerObject);
+
+//   return userAnswerObject;
+// }
 
 const TestQNA = () => {
 
@@ -80,32 +90,46 @@ const TestQNA = () => {
 
   const navigate = useNavigate();
 
-  // function updateTheGraphData(data){
-  //   var subject = Object.keys(data.scores)[0];
 
-  //   var sumFinalScores = 0;
-  //   Object.values(data.scores.final_score).forEach((val)=>{
-  //     sumFinalScores += val
-  //   })
+  function makeReqObject(questions,subjectName){
 
-  //   var retFinalSum = parseInt((((sumFinalScores/5)/100)*10))
+    //let finalans = getQuestionSet(moduleName, subjectName, testType);
+    let finalansRequest = globalFinalAns;
   
-  //   // assuming m2 only uses backend
-  //   TestTotalMarks[testType].m2[subject].totalMarks = retFinalSum;
-  //   console.log('finalllllllll sum',retFinalSum)
-  //   handleNavigate();
-  // }
+    var userAnswerObject = {}, tempUserAnswerObject = {}
   
+    var questionNumber = 1;
+  
+    for (const entry of questions) {
+      const { user_answer } = entry;
+      tempUserAnswerObject[questionNumber++] = user_answer;
+    }
+  
+    console.log('what is this',finalansRequest)
+  
+    userAnswerObject = {
+      ["UserAnswer"] : {
+        [finalansRequest] : tempUserAnswerObject
+      }
+    }
+  
+    console.log('give me object ', userAnswerObject);
+  
+    return userAnswerObject;
+  }
+
   function hitServer(reqObj){
   
     async function fetchData() {
       try {
+        let token = sessionStorage.getItem('myToken');
         navigate('/loading');
 
         const response = await fetch('http://127.0.0.1:8000/api/GetRating/', {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': 'Token ' + token,
           },
           body: JSON.stringify(reqObj)
         });
@@ -162,6 +186,7 @@ const TestQNA = () => {
 
     //major part, hitting the backend endpoint
     var response = hitServer(reqObj);
+
 
     console.log('YAYYYY GOT RESPONSE',response)
   };

@@ -1,7 +1,7 @@
 import EmployeeItem from "./EmployeeItem";
 
 const EmployeeList = ({ seniors }) => {
-  //const { name, avg, company, ctc } = seniors;
+  
   return (
     <div>
       {seniors &&
@@ -9,8 +9,8 @@ const EmployeeList = ({ seniors }) => {
         seniors.map((d, idx) => (
           <EmployeeItem
             name={d.name}
-            avg={d.avg}
-            company={d.avg}
+            eis={d.eis}
+            company={d.eis}
             ctc={d.ctc}
             idx
             key={idx}

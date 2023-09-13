@@ -24,12 +24,12 @@ import Dashboard from "./Dashboard";
 import { useNavigate } from "react-router";
 import TestsTaken from './MenuBarComponents/TestsTaken'
 import EmploymentDB from "./MenuBarComponents/EmploymentDB";
-import DetailedAnalytics from "./MenuBarComponents/DetailedAnalytics";
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 import { Routes, Route, Outlet, Link, useParams } from "react-router-dom";
 import Resources from "./MenuBarComponents/Resources";
 import ProfileCard from "./MenuBarComponents/ProfileCard";
 import React, {useState} from "react";
+import Leaderboard from "./MenuBarComponents/Leaderboard";
 
 
 const drawerWidth = 240;
@@ -117,10 +117,10 @@ export default function PersistentDrawerLeft() {
     setMenuData('employment-db')
   };
 
-  const handleDetailedAnalyticsClick = () => {
-    // Use the navigate function to redirect to the Detailed Analytics page
-    navigate('/dashboard/detailed-analytics');
-    setMenuData('detailed-analytics')
+  const handleLeaderBoardClick = () => {
+    // Use the navigate function to redirect to the leaderboard page
+    navigate('/dashboard/leaderboard');
+    setMenuData('leaderboard')
   };
 
   const handleAccountCircleClick = () => {
@@ -208,12 +208,12 @@ export default function PersistentDrawerLeft() {
             </ListItemButton>
           </ListItem>
 
-          <ListItem key="Detailed Analytics" disablePadding>
-            <ListItemButton onClick={handleDetailedAnalyticsClick}>
+          <ListItem key="Leaderboard" disablePadding>
+            <ListItemButton onClick={handleLeaderBoardClick}>
               <ListItemIcon>
                 <TimelineIcon />
               </ListItemIcon>
-              <ListItemText primary="Detailed Analytics" />
+              <ListItemText primary="Leaderboard" />
             </ListItemButton>
           </ListItem>
 
@@ -232,7 +232,7 @@ export default function PersistentDrawerLeft() {
         {menuData==='dashboard' && <Dashboard />}
         {menuData==='tests-taken' && <TestsTaken />}
         {menuData==='employment-db' && <EmploymentDB />}
-        {menuData==='detailed-analytics' && <DetailedAnalytics />}
+        {menuData==='leaderboard' && <Leaderboard />}
         {menuData==='resources' && <Resources />}
 
         <Routes>
@@ -260,15 +260,15 @@ export default function PersistentDrawerLeft() {
               }
             />
             <Route
-              path="detailed-analytics"
+              path="leaderboard"
               element={
-                  <DetailedAnalytics />
+                  <Leaderboard />
               }
             />
             <Route
               path="resources"
               element={
-                  <DetailedAnalytics />
+                  <Resources />
               }
             />
           </Route>
