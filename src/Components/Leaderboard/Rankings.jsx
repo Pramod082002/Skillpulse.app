@@ -40,7 +40,11 @@ const fetchUsers = async () => {
 const Rankings = ({ UserEmail }) => {
   const { data: fetchedData, isFetching, isError } = useQuery(
     "scoreBoardKey",
-    fetchUsers
+    fetchUsers,
+    {
+      // Set staleTime to a high value to avoid frequent refetches
+      staleTime: Infinity,
+    }
   );
 
   const [allUsers, setallUsers] = useState([]);
@@ -50,8 +54,6 @@ const Rankings = ({ UserEmail }) => {
   const [user1, setUser1] = useState({});
   //user2 is the one who user1 wants to compare himself
   const [user2, setUser2] = useState({});
-
-  const [data, setData] = useState({});
 
   //MODAL RELATED.
   const [openModal, setOpenModal] = useState(false);
@@ -71,7 +73,6 @@ const Rankings = ({ UserEmail }) => {
 
   useEffect(() => {
     if (fetchedData) {
-      setData(fetchedData);
 
       const scores = fetchedData?.all_scores;
       const score_board = fetchedData?.score_board;
@@ -110,7 +111,7 @@ const Rankings = ({ UserEmail }) => {
       setUser1(user);
       setallUsers(users);
     }
-  }, [fetchedData]);
+  }, []);
 
   if (isFetching) {
     return <Spinner />;
