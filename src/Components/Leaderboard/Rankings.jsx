@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import RankingList from "./RankingList";
-
 import { Box, Typography, Modal } from "@mui/material";
 import ComparisonTable from "./ComparisonTable";
+import { useQuery } from "react-query";
+import Spinner from "../Spinner";
+import ErrorLoader from "../ErrorLoader";
 
 const style = {
   position: "absolute",
@@ -17,7 +19,30 @@ const style = {
   height: 500,
 };
 
-const Rankings = ({ UserEmail }) => { 
+const apiEndpoint = "http://127.0.0.1:8000/api/dbaccess/get-scoreboard/";
+
+const fetchUsers = async () => {
+  const response = await fetch(apiEndpoint, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Token " + sessionStorage.getItem("myToken"),
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error("Network response was not ok");
+  }
+
+  return response.json();
+};
+
+const Rankings = ({ UserEmail }) => {
+  const { data: fetchedData, isFetching, isError } = useQuery(
+    "scoreBoardKey",
+    fetchUsers
+  );
+
   const [allUsers, setallUsers] = useState([]);
   const [userRank, setUserRank] = useState(0);
 
@@ -26,144 +51,30 @@ const Rankings = ({ UserEmail }) => {
   //user2 is the one who user1 wants to compare himself
   const [user2, setUser2] = useState({});
 
+  const [data, setData] = useState({});
+
   //MODAL RELATED.
   const [openModal, setOpenModal] = useState(false);
-  const handleOpen = (email) => {
-    setUser2(() => allUsers.find((u) => u.email === email));
 
+  // Function to open the modal and set user2
+  const handleOpen = (email) => {
+    setUser2(allUsers.find((u) => u.email === email));
     setOpenModal(true);
   };
+
   const handleClose = () => setOpenModal(false);
 
-  // finds the user that we need to compare in the allUsers
-  //the opens the modal
+  // Finds the user that we need to compare in the allUsers, then opens the modal
   const findUserAndOpenModal = (email) => {
     handleOpen(email);
   };
 
   useEffect(() => {
-    const fetchUsers = async () => {
-      // db call.
-      // array of user objects.
-      const data = {
-        all_scores: {
-          "test@gmail.com": {
-            entryTest: {
-              cn: {
-                "Introduction and Physical layer": 96,
-                "Data link layer and LAN": 89,
-                "Network and Routing": 82,
-                "Transport layer": 96,
-                "Application layer": 0,
-                totalMarks: 7.26,
-              },
-              dbms: {
-                "Relational Databases": -1,
-                "Database Design": -1,
-                "Transactions and Concurrency": -1,
-                "Data Storage and Querying": -1,
-                "Advanced topics": -1,
-                totalMarks: -1,
-              },
-              os: {
-                "Operating System Overview": 14,
-                "Process Management": 14,
-                "Storage Management and File System": 51,
-                "I/O Systems": 61,
-                "Case Study": 71,
-                totalMarks: 4,
-              },
-            },
-            exitTest: {
-              cn: {
-                "Introduction and Physical layer": -1,
-                "Data link layer and LAN": -1,
-                "Network and Routing": -1,
-                "Transport layer": -1,
-                "Application layer": -1,
-                totalMarks: -1,
-              },
-              dbms: {
-                "Relational Databases": 16,
-                "Database Design": 17,
-                "Transactions and Concurrency": 61,
-                "Data Storage and Querying": 51,
-                "Advanced topics": 66,
-                totalMarks: 4,
-              },
-              os: {
-                "Operating System Overview": -1,
-                "Process Management": -1,
-                "Storage Management and File System": -1,
-                "I/O Systems": -1,
-                "Case Study": -1,
-                totalMarks: -1,
-              },
-            },
-          },
-          "yogi@gmail.com": {
-            entryTest: {
-              cn: {
-                "Introduction and Physical layer": -1,
-                "Data link layer and LAN": -1,
-                "Network and Routing": -1,
-                "Transport layer": -1,
-                "Application layer": -1,
-                totalMarks: -1,
-              },
-              dbms: {
-                "Relational Databases": 79,
-                "Database Design": 76,
-                "Transactions and Concurrency": 23,
-                "Data Storage and Querying": 0,
-                "Advanced topics": 0,
-                totalMarks: 3.56,
-              },
-              os: {
-                "Operating System Overview": 14,
-                "Process Management": 14,
-                "Storage Management and File System": 51,
-                "I/O Systems": 61,
-                "Case Study": 71,
-                totalMarks: 4,
-              },
-            },
-            exitTest: {
-              cn: {
-                "Introduction and Physical layer": -1,
-                "Data link layer and LAN": -1,
-                "Network and Routing": -1,
-                "Transport layer": -1,
-                "Application layer": -1,
-                totalMarks: -1,
-              },
-              dbms: {
-                "Relational Databases": 16,
-                "Database Design": 17,
-                "Transactions and Concurrency": 61,
-                "Data Storage and Querying": 51,
-                "Advanced topics": 66,
-                totalMarks: 4,
-              },
-              os: {
-                "Operating System Overview": -1,
-                "Process Management": -1,
-                "Storage Management and File System": -1,
-                "I/O Systems": -1,
-                "Case Study": -1,
-                totalMarks: -1,
-              },
-            },
-          },
-        },
-        score_board: {
-          "test@gmail.com": 37.53333333333333,
-          "yogi@gmail.com": 25.2,
-        },
-      };
+    if (fetchedData) {
+      setData(fetchedData);
 
-      const scores = data?.all_scores;
-      const score_board = data?.score_board;
+      const scores = fetchedData?.all_scores;
+      const score_board = fetchedData?.score_board;
       let users = [];
       for (let key in score_board) {
         let temp = {
@@ -179,13 +90,14 @@ const Rankings = ({ UserEmail }) => {
         users.push(temp);
       }
 
-      // sort users based on EIS SCORE.
+      // Sort users based on EIS SCORE.
       users.sort((a, b) => b.eis_score - a.eis_score);
 
-      //rank , name of the logged in user
-      let rank = 0,
-        user = "";
-      //find the rank of the logged in user
+      // Rank and name of the logged-in user
+      let rank = 0;
+      let user = "";
+
+      // Find the rank of the logged-in user
       for (let i = 0; i < users.length; i++) {
         if (users[i].email !== UserEmail) continue;
 
@@ -197,10 +109,16 @@ const Rankings = ({ UserEmail }) => {
       setUserRank(rank + 1);
       setUser1(user);
       setallUsers(users);
-    };
+    }
+  }, [fetchedData]);
 
-    fetchUsers();
-  }, []);
+  if (isFetching) {
+    return <Spinner />;
+  }
+
+  if (isError) {
+    return <ErrorLoader />;
+  }
 
   return (
     <div>
@@ -210,12 +128,11 @@ const Rankings = ({ UserEmail }) => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <ComparisonTable user1={user1} user2={user2} />
+        <div style={style}>
+          <ComparisonTable user1={user1} user2={user2} />
+        </div>
       </Modal>
 
-      <div>
-        <h1>Rankings</h1>
-      </div>
       <div>
         <p>{`Your Rank : ${userRank} / ${allUsers.length}`}</p>
       </div>

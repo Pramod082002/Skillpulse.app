@@ -8,6 +8,7 @@ import {
   Divider,
   Button,
   CardActions,
+  Avatar
 } from "@mui/material";
 
 const RankingItem = ({
@@ -23,40 +24,38 @@ const RankingItem = ({
   const studentScore = eis_score;
   // console.log(ranking, name, eis_score);
 
+  const avatarSrc = `https://avatars.dicebear.com/api/identicon/${email}.svg`;
+
   const clickHandler = () => {
     Modalopener(email);
   };
 
   return (
-    <Card sx={{ display: "flex", backgroundColor: isUser ? "#86f791" : "" }}>
+    <Card sx={{ display: "flex", justifyContent:'space-around', backgroundColor: isUser ? "#86f791" : "" }}>
       <CardHeader title={studentRank} />
 
-      <CardMedia
-        component="img"
-        sx={{ width: 100, borderRadius: "50%", border: "2px solid black" }}
-        image="/images/avatar.png"
-        alt="Student Profile Picture"
-      />
+      <div style={{width:'100px', display:'flex', alignItems:'center' , justifyContent:'center'}}>
+        <Avatar  style={{ height:'fit-content' }} alt="X" src={avatarSrc} />
+      </div>
 
       <CardContent>
         <Typography variant="h5" component="div">
           {studentName}
         </Typography>
         <Typography sx={{ mb: 1.5 }} color="text.secondary">
-          EIS SCORE - {studentScore}
+          EIS SCORE - {studentScore.toPrecision(4)}
         </Typography>
       </CardContent>
+      
       <CardActions>
-        {!isUser && (
           <Button
             size="small"
             color="primary"
             onClick={clickHandler}
-            sx={{ border: "2px solid black" }}
+            sx={{ border: "2px solid black", disabled: (isUser===true) ? true : false }}
           >
             Compare
           </Button>
-        )}
       </CardActions>
     </Card>
   );
