@@ -14,46 +14,47 @@ import {
 
 import { Card, Box, CardContent, Typography, CardMedia } from "@mui/material";
 import ErrorLoader from "../ErrorLoader";
+import { useQuery } from 'react-query';
+import Spinner from "../Spinner";
 
-const EmploymentDetails = ({ eis }) => {
-  // senoirs that are matched with current user.
+
+const EmploymentDetails = () => {
+
+  async function fetchDataFunction() {
+
+    const response = await fetch('http://127.0.0.1:8000/api/dbaccess/seniordata/', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Token ' + sessionStorage.getItem('myToken'),
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json();
+  }
+
+  const { data, isLoading, isError } = useQuery('employmentdbKey', fetchDataFunction);
+
   const [arrangement, setArrangement] = useState("");
-  const [isFetching, setIsFetching] = useState(false);
   const [result,changeResult]  = useState([]);
 
-  useEffect(() => {
-    const findPeople = async () => {
+  useEffect(()=>{
+    if (data) {
+      console.log('got fetched data emp db ', data);
+      changeResult(data);
+    }
+  },[data])
 
-      setIsFetching(true);
+  if (isLoading) {
+    return <Spinner />;
+  }
 
-      let temp = [
-        // {
-        //   name: "a1",
-        //   eis: 89.7,
-        //   company: "amazon",
-        //    ctc: 23,
-        // },
-        // {
-        //   name: "a2",
-        //   eis: 89.7,
-        //   company: "amazon",
-        //   ctc: 81,
-        // },
-        // {
-        //   name: "a3",
-        //   eis: 89.7,
-        //   company: "amazon",
-        //   ctc: 88,
-        // },
-      ];
-
-      changeResult(temp)
-
-      setIsFetching(false);
-    };
-    findPeople();
-    
-  }, [result]);
+  if (isError) {
+    return <ErrorLoader />;
+  }
 
   const higherToLower = (a, b) => {
     return b.ctc - a.ctc;
@@ -65,30 +66,31 @@ const EmploymentDetails = ({ eis }) => {
 
   const sortHandler = (e) => {
     const type = e.target.value;
-
-    let temp = result;
     setArrangement(type);
-
+  
+    let temp = [...result]; // Create a copy of the result array
+  
     if (type === "asc") {
       temp.sort(lowerToHigher);
-    }
-    else{
+    } else {
       temp.sort(higherToLower);
     }
-
+  
     changeResult(temp);
   };
+  
 
   return (
-    <>
-    {
-      result.length===0 ? (
-        <ErrorLoader />
-      ) : (
+    <div>
+      {result.length !== 0 &&
         <>
+        <div>
+          <h1 id="headingFont" style={{ textAlign: 'center', margin:'10px' }}>Employment Database</h1>
+          <Divider></Divider>
+        </div>
         <div style={{ marginTop: "20px" }}>
 
-          {result.length !== 0 && (
+          
             <FormControl style={{ minWidth: "200px" }}>
               <InputLabel id="demo-simple-select-label">Sort</InputLabel>
               <Select
@@ -102,54 +104,56 @@ const EmploymentDetails = ({ eis }) => {
                 <MenuItem value="desc">Higher to Lower</MenuItem>
               </Select>
             </FormControl>
-          )}
         </div>
+
         <Divider />
 
-        <Card sx={{ display: "flex", margin:'10px' }} >
-          <Box width="100%"> {/* Set the width to 100% */}
-            <CardContent sx={{ display: "flex", flexDirection:'row', justifyContent:'space-between', alignItems:'center' , width: '100%' }}> {/* Set the width to 100% */}
-              
-              <Typography sx={{width:'100px', textAlign:'center'}} component="div" variant="subtitle1">
-                Profile
-              </Typography>
+        <div>
+          <Card sx={{ display: "flex", margin:'10px' }} >
+            <Box width="100%"> {/* Set the width to 100% */}
+              <CardContent sx={{ display: "flex", flexDirection:'row', justifyContent:'space-between', alignItems:'center' , width: '100%' }}> {/* Set the width to 100% */}
+                
+                <Typography sx={{width:'100px', textAlign:'center'}} component="div" variant="subtitle1">
+                  Profile
+                </Typography>
 
-              <Typography sx={{width:'100px', textAlign:'center'}} component="div" variant="subtitle1">
-                Name
-              </Typography>
+                <Typography sx={{width:'100px', textAlign:'center'}} component="div" variant="subtitle1">
+                  Name
+                </Typography>
 
-              <Typography
-                variant="subtitle1"
-                component="div"
-                sx={{width:'100px', textAlign:'center'}}
-              >
-                Company
-              </Typography>
+                <Typography
+                  variant="subtitle1"
+                  component="div"
+                  sx={{width:'100px', textAlign:'center'}}
+                >
+                  Company
+                </Typography>
 
-              <Typography
-                variant="subtitle1"
-                component="div"
-                sx={{width:'100px', textAlign:'center'}}
-              >
-                CTC (LPA)
-              </Typography>
+                <Typography
+                  variant="subtitle1"
+                  component="div"
+                  sx={{width:'100px', textAlign:'center'}}
+                >
+                  CTC (LPA)
+                </Typography>
 
-              <Typography
-                variant="subtitle1"
-                component="div"
-                sx={{width:'100px', textAlign:'center'}}
-              >
-                EIS Score
-              </Typography>
-            </CardContent>
-          </Box>
-        </Card>
+                <Typography
+                  variant="subtitle1"
+                  component="div"
+                  sx={{width:'100px', textAlign:'center'}}
+                >
+                  EIS Score
+                </Typography>
+              </CardContent>
+            </Box>
+          </Card>
+          
+          <EmployeeList seniors={result} />
+        </div>
+        </>
+      }
 
-        {result.length !== 0 && <EmployeeList seniors={result} />}
-      </>
-      )
-    }
-    </>
+    </div>
   );
 };
 

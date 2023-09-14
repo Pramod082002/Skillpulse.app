@@ -1,138 +1,221 @@
 import React, { useState, useEffect } from 'react'
-import { TestModulesHistory } from '../../Data/TestHistory';
+import { TestModulesHistory, TestTotalMarks } from '../../Data/TestHistory';
 import Loading from '../Spinner'
 import ErrorLoader from '../ErrorLoader'
 import '../../App.css'
 import {
   Divider,
 } from '@mui/material';
+import { useQuery } from 'react-query';
+import Spinner from '../Spinner';
+import { Card, Box, CardContent, Typography, CardMedia } from "@mui/material";
 
-const apiEndpoint = "https://jsonplaceholder.typicode.com/todos/1";
-
-const tempObject = {
-  m1: {
-    "c/c++": {
-      subjectName: "C/C++",
-      entryTest: true,
-      exitTest: false,
-      entryTestCompletion: "2023-09-08", // Sample date
-      exitTestCompletion: "",
-    },
-    "java": {
-      subjectName: "JAVA",
-      entryTest: false,
-      exitTest: false,
-      entryTestCompletion: "",
-      exitTestCompletion: "",
-    },
-    "oops": {
-      subjectName: "OOPS",
-      entryTest: false,
-      exitTest: false,
-      entryTestCompletion: "",
-      exitTestCompletion: "",
-    },
-    "dsa": {
-      subjectName: "DSA",
-      entryTest: true,
-      exitTest: true,
-      entryTestCompletion: "2023-09-08", // Sample date
-      exitTestCompletion: "2023-09-15", // Sample date
-    },
-  },
-  m2: {
-    "dbms": {
-      subjectName: "DBMS",
-      entryTest: false,
-      exitTest: false,
-      entryTestCompletion: "",
-      exitTestCompletion: "",
-    },
-    "cn": {
-      subjectName: "CN",
-      entryTest: true,
-      exitTest: false,
-      entryTestCompletion: "2023-09-10", // Sample date
-      exitTestCompletion: "",
-    },
-    "os": {
-      subjectName: "OS",
-      entryTest: false,
-      exitTest: false,
-      entryTestCompletion: "",
-      exitTestCompletion: "",
-    },
-  },
-};
-
-// You can further update other subjects as needed.
+const apiEndpoint = "http://localhost:8000/api/dbaccess/get-total-marks/";
 
 function TestsTaken() {
 
-  const [testModulesHistory, changeTestModulesHistory] = useState(TestModulesHistory);
+  const { data, isLoading, isError } = useQuery('dataKey', fetchData);
 
-  const [isLoading, setIsLoading] = useState(true);
-  const [fetchError,setFetchError] = useState(false);
+  const [testModulesHistory, changeTestModulesHistory] = useState(TestModulesHistory);
+  const [cardContent, setCardContent] = useState([]);
+
+
+  const updateCardContent = (testModulesHistory) =>{
+
+    let moduleOneArray = [], moduleTwoArray = [];
+
+    //first for m1 - entry and exit test
+    Object.keys(testModulesHistory.m1).forEach((subject)=>{
+  
+      let tempEntryObject = {}, tempExitObject = {};  
+
+      //entry test
+      if(testModulesHistory.m1[subject]['entryTest']===true){
+
+        tempEntryObject['module'] = 'm1';
+        tempEntryObject['subject'] = subject;
+        tempEntryObject['testtype'] = 'entryTest';
+        tempEntryObject['time'] = testModulesHistory.m1[subject].entryTestCompletion;
+
+  
+        moduleOneArray.push(tempEntryObject)
+      }
+  
+      //exit test
+      if(testModulesHistory.m1[subject]['exitTest']){
+        tempExitObject['module'] = 'm1';
+        tempExitObject['subject'] = subject;
+        tempExitObject['testtype'] = 'exitTest';
+        tempExitObject['time'] = testModulesHistory.m1[subject].exitTestCompletion;
+
+        moduleOneArray.push(tempExitObject)
+      }
+
+    })
+  
+    Object.keys(testModulesHistory.m2).forEach((subject)=>{
+  
+      let tempEntryObject = {}, tempExitObject = {};
+  
+      //entry test
+      if(testModulesHistory.m2[subject]['entryTest']){
+        tempEntryObject['module'] = 'm2';
+        tempEntryObject['subject'] = subject;
+        tempEntryObject['testtype'] = 'entryTest';
+        tempEntryObject['time'] = testModulesHistory.m2[subject].entryTestCompletion;
+
+        console.log('2',testModulesHistory.m2[subject].entryTestCompletion)
+  
+        moduleTwoArray.push(tempEntryObject)
+      }
+ 
+      //exit test
+      if(testModulesHistory.m2[subject]['exitTest']===true){
+        tempExitObject['module'] = 'm2';
+        tempExitObject['subject'] = subject;
+        tempExitObject['testtype'] = 'exitTest';
+        tempExitObject['time'] = testModulesHistory.m2[subject].exitTestCompletion;
+
+        console.log('2',testModulesHistory.m2[subject].exitTestCompletion)
+  
+        moduleTwoArray.push(tempExitObject)
+      }
+  
+    })
+  
+    return moduleOneArray.concat(moduleTwoArray)
+  
+  }
+
+  async function fetchData(){
+
+    const response = await fetch(apiEndpoint,{
+      method : "GET",
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Token ' + sessionStorage.getItem('myToken'),
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+
+    return response.json();
+
+  }
 
   useEffect(()=>{
 
-    async function fetchData(){
-
-      try{
-
-        const response = await fetch(apiEndpoint,{
-          method : "GET",
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Token ' + sessionStorage.getItem('myToken'),
-          },
-        });
-
-        if (!response.ok) {
-          const statusCode = response.status; 
-          throw new Error(statusCode);
-        }
-    
-        const data = await response.json();
-
-        //updating the testModulesHistory
-        //changeTestModulesHistory(data);
-        changeTestModulesHistory(tempObject)
-      }
-      catch(error){
-        console.log("Error fetching",error.message)
-        setFetchError(true)
-      }
-      finally{
-        if(!fetchError) setIsLoading(false)
-      }
-
+    if(data){
+      changeTestModulesHistory(data)
+      setCardContent(updateCardContent(data))
+      console.log(cardContent)
     }
 
-    fetchData()
+  },[data,testModulesHistory])
 
+  if(isLoading){
+    return <Spinner />
+  }
 
-    //now calculate and display the test history cards
-    //get for module1 and module2
-
-
-  },[])
+  if(isError){
+    return <ErrorLoader />
+  }
 
   return (
     <div style={{marginTop:'50px'}}>
-      {
-        fetchError && <ErrorLoader />
-      }
-      {
-        !isLoading && !fetchError ? (
-          <div>
-              <h1 id="headingFont" style={{ textAlign: 'center', margin:'10px' }}>Test History</h1>
-              <Divider></Divider>
-          </div>
-        ) : (
-          <Loading />
-        )
-      }
+      <div>
+          <h1 id="headingFont" style={{ textAlign: 'center', margin:'10px' }}>Test History</h1>
+          <Divider></Divider>
+      </div>
+
+
+      <div>
+
+        <Card sx={{ display: "flex", margin:'10px' }} >
+
+          <Box width="100%"> {/* Set the width to 100% */}
+            <CardContent sx={{ display: "flex", flexDirection:'row', justifyContent:'space-between', alignItems:'center' , width: '100%' }}> {/* Set the width to 100% */}
+
+              <Typography
+                variant="subtitle1"
+                component="div"
+                sx={{width:'100px', textAlign:'center'}}
+              >
+                Module
+              </Typography>
+
+              <Typography
+                variant="subtitle1"
+                component="div"
+                sx={{width:'100px', textAlign:'center'}}
+              >
+                Subject
+              </Typography>
+
+              <Typography
+                variant="subtitle1"
+                component="div"
+                sx={{width:'100px', textAlign:'center'}}
+              >
+                Test Type
+              </Typography>
+
+              <Typography
+                variant="subtitle1"
+                component="div"
+                sx={{width:'100px', textAlign:'center'}}
+              >
+                Time
+              </Typography>
+
+            </CardContent>
+          </Box>
+
+        </Card>
+
+          {
+            cardContent.map((content, idx) => (
+              <Card sx={{ display: "flex", margin:'10px' }} key={idx} >
+                <Box width="100%">
+                  <CardContent sx={{ display: "flex", flexDirection:'row', justifyContent:'space-between', alignItems:'center' , width: '100%' }}>
+                    <Typography
+                      variant="subtitle1"
+                      component="div"
+                      sx={{width:'100px', textAlign:'center'}}
+                    >
+                      {content.module}
+                    </Typography>
+                    <Typography
+                      variant="subtitle1"
+                      component="div"
+                      sx={{width:'100px', textAlign:'center'}}
+                    >
+                      {content.subject}
+                    </Typography>
+                    <Typography
+                      variant="subtitle1"
+                      component="div"
+                      sx={{width:'100px', textAlign:'center'}}
+                    >
+                      {content.testtype}
+                    </Typography>
+                    <Typography
+                      variant="subtitle1"
+                      component="div"
+                      sx={{width:'100px', textAlign:'center'}}
+                    >
+                      {content.time}
+                    </Typography>
+                  </CardContent>
+                </Box>
+              </Card>
+            ))
+          }
+
+
+      </div>
     </div>
   )
 }

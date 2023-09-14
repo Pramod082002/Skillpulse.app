@@ -6,9 +6,14 @@ import Home from './Components/Home';
 import Login from './Components/Login';
 import Spinner from './Components/Spinner'
 import MainDrawer from './Components/MainDrawer';
+import { QueryClient, QueryClientProvider } from 'react-query';
 
 function App() {
+
+  const queryClient = new QueryClient();
+
   return (
+    <QueryClientProvider client={queryClient}>
       <Router>
         <Routes>
           <Route path="/" element={<Home />}>
@@ -25,6 +30,7 @@ function App() {
           <Route path="/test/:moduleName/:subjectName/:testType" element={<TestQNA />} />
         </Routes>
       </Router>
+    </QueryClientProvider>
   );
 }
 

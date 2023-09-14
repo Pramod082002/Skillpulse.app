@@ -32,6 +32,8 @@ import ModuleSwitch from './Graphmodules/ModuleSwitch';
 import ModuleSwitchSplit from './SplitWiseComponents/ModuleSwitchSplit';
 import TestSwitchSplit from './SplitWiseComponents/TestSwitchSplit';
 import Spinner from './Spinner';
+import ErrorLoader from './ErrorLoader';
+import { useQuery } from 'react-query';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -46,14 +48,13 @@ const theme = createTheme({
   },
 });
 
-async function updateTestHistory(token) {
-  console.log('sending', token);
-  try {
-    const response = await fetch('http://localhost:8000/api/dbaccess/get-test-mark/', {
+async function updateTestHistory() {
+
+  const response = await fetch('http://localhost:8000/api/dbaccess/get-test-mark/', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Token ' + token,
+        'Authorization': 'Token ' + sessionStorage.getItem('myToken'),
       },
     });
 
@@ -61,24 +62,19 @@ async function updateTestHistory(token) {
       throw new Error('Network response was not ok');
     }
 
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error('Error:', error);
-    throw error;
-  }
+    return response.json();
+
 }
 
 
 function Dashboard() {
 
-  const navigate = useNavigate();
+  const { data, isLoading, isError } = useQuery('dashboardKey', updateTestHistory)
 
-  const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
 
   const [open, setOpen] = useState(false); //to open and close the modal
   const [takeTest,changeTakeTest] = useState([]);
-
   
 
   // call backs for graphs
@@ -93,28 +89,33 @@ function Dashboard() {
   
   useEffect(() => {
 
+    localStorage.setItem('TestTotalMarksCookie', JSON.stringify(totalMarks));
+
     //check for token or redirect to the home page
     let token = sessionStorage.getItem('myToken');
     if (token === null || token === "") {
       navigate('/home');
     }    
 
-    async function fetchData() {
-      try {
-        const fetchedTestHistory = await updateTestHistory(token);
-        console.log('expected data', fetchedTestHistory);
-        changeTotalMarks(fetchedTestHistory);
-      } catch (error) {
-        // Handle error if needed
-      }
-      finally {
-        setIsLoading(false); // Set isLoading to false regardless of success or failure
-      }
-    }
-  
-    fetchData();
   }, []);
 
+  useEffect(()=>{
+    if (data) {
+      console.log('got fetched data', data);
+      changeTotalMarks(data);
+
+      //make a copy and update the TestTotal marks from data here
+      localStorage.setItem('TestTotalMarksCookie', JSON.stringify(data));
+    }
+  },[data])
+
+  if(isLoading){
+    return <Spinner />
+  }
+
+  if(isError){
+    return <ErrorLoader />
+  }
 
   //### call backs for graphs
   const changeTestTypeGraphCallback = (newchoice) =>{
@@ -169,10 +170,6 @@ function Dashboard() {
 
   return (
     <div style={{marginTop:'50px'}}>
-      {
-        isLoading ? (
-          <Spinner />
-        ) : (
           <ThemeProvider theme={theme}>
             <div className='Dashboard-Container'>
 
@@ -255,8 +252,6 @@ function Dashboard() {
               </div>
             </div>
           </ThemeProvider>
-        )
-      }
     </div>
   )
   
