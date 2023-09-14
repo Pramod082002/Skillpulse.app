@@ -22,7 +22,7 @@ const EmploymentDetails = () => {
 
   async function fetchDataFunction() {
 
-    const response = await fetch('http://127.0.0.1:8000/api/dbaccess/seniordata/', {
+    const response = await fetch('http://127.0.0.1:8000/api/dbaccess/get-seniordata/', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -44,7 +44,7 @@ const EmploymentDetails = () => {
   useEffect(()=>{
     if (data) {
       console.log('got fetched data emp db ', data);
-      changeResult(data);
+      changeResult(data.senior_profiles);
     }
   },[data])
 
